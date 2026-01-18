@@ -1,0 +1,1196 @@
+<head>
+   <meta charset="UTF-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>RTX Housing</title>
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>  
+   <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
+   <link rel="stylesheet" href="styles.css">
+   <script type="module" crossorigin src="gizmoapi.js"></script>
+</head>
+<body>
+   <div class="propertycreator-container">
+      <div class="pc-app" id="pcApp">
+         <div class="pc-topbar">
+            <div class="pc-brand"><i class="fa-solid fa-house"></i> <span id="pcBrandMain">Kreator Nieruchomości<span class="brand-type" id="pcBrandType"></span></span></div>
+            <div class="pc-tools">
+               <button class="pc-icon-btn" id="pcBtnClose" title="Zamknij"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+         </div>
+         <div class="pc-stage" id="pcStage"></div>
+      </div>
+      <div class="pc-toast-wrap" id="pcToastWrap"></div>
+      <div class="pc-modal" id="pcDoorsModal">
+         <div class="pc-modal-card">
+            <div class="pc-stack">
+               <div style="display:flex;align-items:center;gap:10px">
+                  <b style="margin-right:auto">Drzwi</b>
+                  <button class="pc-btn pc-btn-small" id="pcDoorsAdd"><i class="fa-solid fa-door-closed"></i> Dodaj drzwi</button>
+                  <button class="pc-btn pc-btn-small" id="pcDoorsClose">Zamknij</button>
+               </div>
+               <div id="pcDoorsList"></div>
+            </div>
+         </div>
+      </div>
+      <div class="pc-modal" id="pcStorageModal">
+         <div class="pc-modal-card">
+            <div class="pc-stack">
+               <div style="display:flex;align-items:center;gap:10px">
+                  <b style="margin-right:auto">Ustawienia magazynu</b>
+                  <button class="pc-btn pc-btn-small" id="pcStorageClose">Zamknij</button>
+               </div>
+               <div class="pc-grid pc-grid-2">
+                  <div>
+                     <div class="pc-group-title">Sloty</div>
+                     <input id="pcStorageSlots" type="number" min="0">
+                  </div>
+                  <div>
+                     <div class="pc-group-title">Waga</div>
+                     <input id="pcStorageWeight" type="number" min="0">
+                  </div>
+               </div>
+               <div style="display:flex;gap:10px;justify-content:flex-end">
+                  <button class="pc-btn pc-btn-primary" id="pcStorageSave">Zapisz</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="pc-modal" id="pcImagesModal">
+         <div class="pc-modal-card pc-images-modal">
+            <div class="pc-stack">
+               <div class="pc-head" style="align-items:center;">
+                  <i class="fa-regular fa-images"></i> Obrazy nieruchomości
+                  <button class="pc-btn pc-btn-small" id="pcImagesClose" style="margin-left:auto;">
+                  <i class="fa-solid fa-xmark" style="color: #ffffff;"></i>
+                  </button>
+               </div>
+               <div class="pc-grid pc-grid-2 pc-images-top">
+                  <div class="pc-panel pc-panel-fill pc-images-box">
+                     <div class="pc-group-title">Dodaj obraz z URL</div>
+                     <div class="pc-field-wrap pc-images-url-wrap">
+                        <input id="pcImagesUrl" type="text"
+                           placeholder="https://example.com/image.jpg">
+                        <button class="pc-btn pc-btn-small" id="pcImagesAddUrl">
+                        <i class="fa-solid fa-plus"></i> Dodaj
+                        </button>
+                     </div>
+                     <div class="pc-muted pc-images-hint">
+                        Wklej bezpośredni URL obrazu (JPG / PNG / WebP…).
+                     </div>
+                  </div>
+                  <div class="pc-panel pc-panel-fill pc-images-box">
+                     <div class="pc-group-title">Zrób zrzut ekranu</div>
+                     <p class="pc-muted pc-images-hint">
+                        Zrób zrzut ekranu z gry i automatycznie dołącz go tutaj.
+                     </p>
+                     <button class="pc-btn pc-btn-primary" id="pcImagesScreenshot">
+                     <i class="fa-solid fa-camera"></i> Zrób zrzut ekranu
+                     </button>
+                  </div>
+               </div>
+               <div class="pc-images-section">
+                  <div class="pc-group-title">Obrazy dla tej nieruchomości</div>
+                  <div id="pcImagesList" class="pc-images-grid"></div>
+                  <div class="pc-images-footer-row">
+                     <span id="pcImagesCount" class="pc-muted">0 obrazów</span>
+                     <button class="pc-btn pc-btn-small" id="pcImagesClear">
+                     <i class="fa-solid fa-trash"></i> Wyczyść wszystko
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="pc-modal" id="pcOwnerModal">
+         <div class="pc-modal-card">
+            <div class="pc-stack">
+               <div class="pc-head"><i class="fa-regular fa-id-badge"></i> Własność</div>
+               <div class="pc-panel">
+                  <div><span class="pc-muted">Nieruchomość</span><br><b id="pcOwnerProp"></b></div>
+                  <div style="margin-top:10px"><span class="pc-muted">Identyfikator właściciela</span><br><span class="pc-owner-id" id="pcOwnerId">—</span></div>
+                  <div style="margin-top:10px"><span class="pc-muted">Nazwa właściciela</span><br><b id="pcOwnerName">—</b></div>
+               </div>
+               <div class="pc-footer">
+                  <button class="pc-btn" id="pcOwnerClose"><i class="fa-solid fa-xmark"></i> Zamknij</button>
+                  <button class="pc-btn pc-btn-primary" id="pcOwnerRemove"><i class="fa-regular fa-user"></i> Usuń własność</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="pcui-keymap" class="pcui-keymap">
+      <div class="pcui-keymap-card">
+         <div class="pcui-keymap-header">
+            <i id="mapicon" class="fa-solid fa-location-dot pcui-keymap-icon"></i>
+            <span id="pcui-keymap-action" class="pcui-keymap-title">
+            Punkt wejścia
+            </span>
+         </div>
+         <ul id="pcui-keymap-list" class="pcui-keymap-list">
+         </ul>
+      </div>
+   </div>
+   <div id="pcui-confirm-modal" class="pcui-modal">
+      <div class="pcui-modal-card">
+         <div class="pcui-modal-head">
+            <span id="pcui-confirm-header">Potwierdź akcję</span>
+            <button id="pcui-confirm-close" class="pcui-icon-btn">
+            <i class="fa-solid fa-xmark"></i>
+            </button>
+         </div>
+         <div class="pcui-modal-body">
+            <p id="pcui-confirm-text">
+               Czy na pewno chcesz wykonać tę akcję?
+            </p>
+         </div>
+         <div class="pcui-modal-footer">
+            <button id="pcui-confirm-cancel" class="pcui-btn pcui-btn-ghost">
+            <i class="fa-solid fa-xmark"></i>
+            <span>Anuluj</span>
+            </button>
+            <button id="pcui-confirm-accept" class="pcui-btn pcui-btn-primary">
+            <i class="fa-solid fa-check"></i>
+            <span>Potwierdź</span>
+            </button>
+         </div>
+      </div>
+   </div>
+   <div id="housing-app" class="hsui-root-app" style="display:none;">
+      <div class="hsui-main-panel">
+         <div class="hsui-top-bar">
+            <div class="hsui-property-info">
+               <div class="hsui-property-title">
+                  <i class="fa-solid fa-house"></i>
+                  <span id="header-name">Nieruchomość</span>
+               </div>
+               <div id="header-address" class="hsui-property-address">Adres</div>
+               <div class="hsui-property-meta">
+                  <span id="chip-mode" class="hsui-status-chip hsui-status-chip-mode">
+                  <i class="fa-solid fa-circle-dot"></i>
+                  <span id="chip-mode-text">Menu</span>
+                  </span>
+                  <span id="chip-lock" class="hsui-status-chip hsui-status-chip-lock-bad">
+                  <i class="fa-solid fa-lock"></i>
+                  <span id="chip-lock-text">Zamknięte</span>
+                  </span>
+               </div>
+            </div>
+            <div class="hsui-toolbar">
+               <button id="btnClose" class="hsui-icon-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+         </div>
+         <div class="hsui-content-stage">
+            <section id="menu-enter" class="hsui-menu">
+               <div class="hsui-section-header">
+                  <div class="hsui-section-title">
+                     <i class="fa-solid fa-door-open"></i>
+                     <span>Wejście</span>
+                  </div>
+                  <div id="enter-right-note" class="hsui-section-side"></div>
+               </div>
+               <div class="hsui-card">
+                  <div class="hsui-card-main-split">
+                     <div class="hsui-card-main-text">
+                        <div class="hsui-card-main-title">Wejdź do nieruchomości</div>
+                        <div class="hsui-card-main-subtitle">Wejdź do środka tej nieruchomości.</div>
+                     </div>
+                     <button id="enter-main" class="hsui-button hsui-button-primary hsui-button-large hsui-button-main">
+                     <i class="fa-solid fa-door-open"></i> Wejdź
+                     </button>
+                  </div>
+                  <div class="hsui-divider"></div>
+                  <div>
+                     <div class="hsui-card-section-header">Akcje</div>
+                     <div class="hsui-actions-row hsui-margin-top-6">
+                        <button id="enter-knock" class="hsui-button">
+                        <i class="fa-solid fa-hand-back-fist"></i> Dzwonek
+                        </button>
+                        <button id="enter-lock-toggle" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-lock"></i> Zamknij / Otwórz
+                        </button>
+                        <button id="enter-furniture-outside" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-couch"></i> Meble na zewnątrz
+                        </button>
+                        <button id="enter-lockpick" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-screwdriver-wrench"></i> Wytrych
+                        </button>
+                        <button id="enter-raid" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-shield-halved"></i> Najazd
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section id="menu-exit" class="hsui-menu">
+               <div class="hsui-section-header">
+                  <div class="hsui-section-title">
+                     <i class="fa-solid fa-door-open"></i>
+                     <span>Wyjście</span>
+                  </div>
+               </div>
+               <div class="hsui-card">
+                  <div class="hsui-card-main-split">
+                     <div class="hsui-card-main-text">
+                        <div class="hsui-card-main-title">Opuść nieruchomość</div>
+                        <div class="hsui-card-main-subtitle">Wyjdź na zewnątrz.</div>
+                     </div>
+                     <button id="exit-main" class="hsui-button hsui-button-primary hsui-button-large hsui-button-main">
+                     <i class="fa-solid fa-person-walking-arrow-right"></i> Wyjdź
+                     </button>
+                  </div>
+                  <div class="hsui-divider"></div>
+                  <div>
+                     <div class="hsui-card-section-header">Akcje</div>
+                     <div class="hsui-actions-row hsui-margin-top-6">
+                        <button id="exit-lock-toggle" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-lock"></i> Zamknij / Otwórz
+                        </button>
+                        <button id="exit-lights-toggle" class="hsui-button">
+                        <i class="fa-regular fa-lightbulb"></i> Światła
+                        </button>
+                        <button id="exit-furniture-inside" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-couch"></i> Meble wewnętrzne
+                        </button>
+                        <button id="exit-deliveries" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-truck-fast"></i> Dostawy
+                        </button>
+                        <button id="exit-cam" class="hsui-button" style="display:none;">
+                        <i class="fa-solid fa-video"></i> Kamera drzwi
+                        </button>			  
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section id="menu-mlo" class="hsui-menu">
+               <div class="hsui-section-header">
+                  <div class="hsui-section-title">
+                     <i class="fa-solid fa-door-open"></i>
+                     <span>MLO</span>
+                  </div>
+               </div>
+               <div class="hsui-card">
+                  <div class="hsui-card-section-header">Akcje</div>
+                  <div class="hsui-actions-row hsui-margin-top-6">
+                     <button id="mlo-knock" class="hsui-button">
+                     <i class="fa-regular fa-hand-back-fist"></i> Dzwonek
+                     </button>
+                     <button id="mlo-lockpick" class="hsui-button" style="display:none;">
+                     <i class="fa-solid fa-screwdriver-wrench"></i> Wytrych
+                     </button>
+                     <button id="mlo-raid" class="hsui-button" style="display:none;">
+                     <i class="fa-solid fa-shield-halved"></i> Najazd
+                     </button>
+                     <button id="mlo-furniture" class="hsui-button" style="display:none;">
+                     <i class="fa-solid fa-couch"></i> Meble
+                     </button>
+                     <button id="mlo-deliveries" class="hsui-button" style="display:none;">
+                     <i class="fa-solid fa-truck-fast"></i> Dostawy
+                     </button>
+                  </div>
+               </div>
+            </section>
+            <section id="menu-purchase" class="hsui-menu">
+               <div class="hsui-section-header">
+                  <div class="hsui-section-title">
+                     <i class="fa-solid fa-file-invoice-dollar"></i>
+                     <span>Nieruchomość</span>
+                  </div>
+               </div>
+               <div class="hsui-card">
+                  <div class="hsui-card-main-split" id="purchase-block">
+                     <div class="hsui-card-main-text">
+                        <div class="hsui-card-main-title">Kup nieruchomość</div>
+                        <div class="hsui-card-main-subtitle">Kup tę nieruchomość na stałe.</div>
+                        <div id="purchase-price" style="margin-top:3px;font-weight:700;font-size:.9rem;">$0</div>
+                     </div>
+                     <button id="purchase-buy-btn" class="hsui-button hsui-button-primary hsui-button-large hsui-button-main">
+                     <i class="fa-solid fa-credit-card"></i> Kup
+                     </button>
+                  </div>
+                  <div id="purchase-rent-block">
+                     <div class="hsui-divider" id="purchase-divider"></div>
+                     <div class="hsui-card-main-split">
+                        <div class="hsui-card-main-text">
+                           <div class="hsui-card-main-title" style="margin-top: 6px;">Wynajmij nieruchomość</div>
+                           <div class="hsui-card-main-subtitle">Płac okresowo za nieruchomość.</div>
+                           <div id="purchase-rent" style="margin-top:3px;font-weight:700;font-size:.9rem;">$0</div>
+                        </div>
+                        <button id="purchase-rent-btn" style="margin-top: 6px;"class="hsui-button hsui-button-primary hsui-button-large hsui-button-main">
+                        <i class="fa-solid fa-file-contract"></i> Wynajmij
+                        </button>
+                     </div>
+                  </div>
+                  <div class="hsui-divider"></div>
+                  <div>
+                     <div class="hsui-card-section-header">Dodatki</div>
+                     <div class="hsui-actions-row hsui-margin-top-6">
+                        <button id="purchase-view" class="hsui-button">
+                        <i class="fa-solid fa-eye"></i> Sprawdź wnętrze
+                        </button>
+                        <button id="purchase-utilities" class="hsui-button">
+                        <i class="fa-solid fa-plug"></i> Media
+                        </button>
+                        <button id="purchase-description" class="hsui-button">
+                        <i class="fa-solid fa-book-open"></i> Informacje
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section id="menu-apartments" class="hsui-menu">
+               <div class="hsui-section-header">
+                  <div class="hsui-section-title">
+                     <i class="fa-solid fa-building"></i>
+                     <span>Mieszkania</span>
+                  </div>
+                  <div class="hsui-section-side">
+                     <span class="hsui-info-label">Jednostki:</span>
+                     <span id="apartment-count" class="hsui-info-value">0</span>
+                     <button id="apartments-info" class="hsui-info-dot" title="Informacje o kompleksie">
+                     <i class="fa-solid fa-info"></i>
+                     </button>
+                  </div>
+               </div>
+               <div class="hsui-card">
+                  <div>
+                     <div class="hsui-card-section-header">Jednostki</div>
+                  </div>
+                  <div id="apartment-list" class="hsui-list"></div>
+               </div>
+            </section>
+         </div>
+      </div>
+   </div>
+   <div id="modal-description" class="hsui-modal">
+      <div class="hsui-modal-card">
+         <div class="hsui-modal-header">
+            <span id="modal-description-title">Opis</span>
+            <button class="hsui-icon-button" data-modal-close="modal-description"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div id="modal-description-body" class="hsui-modal-body"></div>
+         <div class="hsui-modal-footer">
+            <button class="hsui-button" data-modal-close="modal-description"><i class="fa-solid fa-xmark"></i> Zamknij</button>
+         </div>
+      </div>
+   </div>
+   <div id="modal-deliveries" class="hsui-modal">
+      <div class="hsui-modal-card">
+         <div class="hsui-modal-header">
+            <span>Dostawy</span>
+            <button class="hsui-icon-button" data-modal-close="modal-deliveries"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div id="deliveries-list" class="hsui-modal-body"></div>
+         <div class="hsui-modal-footer">
+            <button class="hsui-button" data-modal-close="modal-deliveries"><i class="fa-solid fa-xmark"></i> Zamknij</button>
+         </div>
+      </div>
+   </div>
+   <div id="modal-view" class="hsui-modal">
+      <div class="hsui-modal-card">
+         <div class="hsui-modal-header">
+            <span>Sprawdź wnętrze</span>
+            <button class="hsui-icon-button" data-modal-close="modal-view"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="hsui-modal-body">
+            <p class="hsui-list-note">Zostaniesz przeniesiony do środka, aby zobaczyć podgląd tej nieruchomości.</p>
+         </div>
+         <div class="hsui-modal-footer">
+            <button id="view-btn-confirm" class="hsui-button hsui-button-primary">
+            <i class="fa-solid fa-person-through-window"></i> Zobacz
+            </button>
+         </div>
+      </div>
+   </div>
+   <div id="modal-purchase" class="hsui-modal">
+      <div class="hsui-modal-card">
+         <div class="hsui-modal-header">
+            <span id="modal-purchase-title">Potwierdź</span>
+            <button class="hsui-icon-button" data-modal-close="modal-purchase"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div id="modal-purchase-body" class="hsui-modal-body"></div>
+         <div class="hsui-modal-footer">
+            <button class="hsui-button" data-modal-close="modal-purchase"><i class="fa-solid fa-xmark"></i> Anuluj</button>
+            <button id="modal-purchase-yes" class="hsui-button hsui-button-primary"><i class="fa-solid fa-check"></i> Tak</button>
+         </div>
+      </div>
+   </div>
+   <div id="modal-utilities" class="hsui-modal">
+      <div class="hsui-modal-card">
+         <div class="hsui-modal-header">
+            <span>Media</span>
+            <button class="hsui-icon-button" data-modal-close="modal-utilities"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="hsui-modal-body">
+            <div class="hsui-list">
+               <div class="hsui-list-item">
+                  <div class="hsui-list-main">
+                     <span>Prąd</span>
+                     <span id="util-modal-electricity" class="hsui-list-note">$0</span>
+                  </div>
+                  <span id="util-modal-electricity-rate" class="hsui-list-note">—</span>
+               </div>
+               <div class="hsui-list-item">
+                  <div class="hsui-list-main">
+                     <span>Woda</span>
+                     <span id="util-modal-water" class="hsui-list-note">$0</span>
+                  </div>
+                  <span id="util-modal-water-rate" class="hsui-list-note">—</span>
+               </div>
+               <div class="hsui-list-item">
+                  <div class="hsui-list-main">
+                     <span>Internet</span>
+                     <span id="util-modal-internet" class="hsui-list-note">$0</span>
+                  </div>
+                  <span id="util-modal-internet-rate" class="hsui-list-note">—</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="lockpick-ui">
+      <div class="lp-shell">
+         <div class="lp-circle">
+            <div class="lp-circle-ring">
+               <div class="lp-circle-icon">
+                  <i class="fa-solid fa-lock"></i>
+               </div>
+               <div class="lp-circle-main">
+                  <div class="pins" id="lp-circle-pins">0 / 0</div>
+                  <div class="label" id="pins">szpilki</div>
+               </div>
+               <div class="lp-circle-bottom" id="lp-circle-fails">
+                  Błędy: 0
+               </div>
+            </div>
+         </div>
+         <div class="lp-row">
+            <div class="lp-pin-bar">
+               <div class="lp-pin-sweet-range" id="lp-sweet-range"></div>
+               <div class="lp-pin-marker" id="lp-marker" style="left:50%;"></div>
+            </div>
+            <button class="lp-hit-btn" id="lp-hit-btn">
+            <i class="fa-solid fa-key"></i>
+            </button>
+         </div>
+      </div>
+   </div>
+   <div id="house-ui" class="hmh-root">
+   </div>
+   <div id="cooking-app">
+      <div class="cook-main">
+         <div class="cook-topbar">
+            <div class="cook-header-info">
+               <div class="cook-header-title">
+                  <i class="fa-solid fa-bowl-food"></i>
+                  <span id="cook-header-name">Kuchnia</span>
+               </div>
+            </div>
+            <div class="cook-toolbar">
+               <button id="cook-btn-close" class="cook-icon-button" title="Zamknij">
+               <i class="fa-solid fa-xmark"></i>
+               </button>
+            </div>
+         </div>
+         <div class="cook-stage">
+            <div class="cook-layout">
+               <div class="cook-card">
+                  <div class="cook-section-header">
+                     <span>
+                     <i class="fa-solid fa-list"></i>
+                     <span>Przepisy</span>
+                     </span>
+                     <span id="cook-recipe-count" style="font-size:.76rem;color:var(--muted);">0 przepisów</span>
+                  </div>
+                  <div class="cook-divider"></div>
+                  <div id="cook-recipe-list" class="cook-recipe-list"></div>
+               </div>
+               <div class="cook-card">
+                  <div class="cook-section-header">
+                     <span>
+                     <i class="fa-solid fa-kitchen-set"></i>
+                     <span>Szczegóły</span>
+                     </span>
+                  </div>
+                  <div class="cook-divider"></div>
+                  <div id="cook-detail-empty" style="font-size:.8rem;color:var(--muted);padding:4px 0;">
+                     Wybierz przepis po lewej stronie, aby zobaczyć składniki i rozpocząć gotowanie.
+                  </div>
+                  <div id="cook-detail-body" style="display:none;">
+                     <div class="cook-detail-title">
+                        <span id="cook-detail-name">Nazwa przepisu</span>
+                     </div>
+                     <div id="cook-detail-description" class="cook-detail-subtitle">
+                        Krótki opis dania.
+                     </div>
+                     <div class="cook-detail-row" style="margin-top:10px;">
+                        <div style="display:flex;flex-direction:column;gap:2px;">
+                           <span style="font-size:.78rem;color:var(--muted);">Czas</span>
+                           <span id="cook-detail-time" style="font-size:.84rem;font-weight:600;">0s</span>
+                        </div>
+                     </div>
+                     <div style="margin-top:10px;">
+                        <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:4px;">
+                           Składniki
+                        </div>
+                        <ul id="cook-ingredients-list" class="cook-ingredients-list"></ul>
+                     </div>
+                     <div class="cook-buttons-row">
+                        <button id="cook-btn-start" class="cook-button cook-button-primary cook-button-main" disabled>
+                        <i class="fa-solid fa-fire-burner"></i> Rozpocznij gotowanie
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="furn-ui-main">
+      <div id="furn-ui-root">
+         <section class="furn-panel furn-main">
+            <div class="furn-topbar">
+               <div id="furn-breadcrumb" class="furn-breadcrumb">Wybierz kategorię</div>
+               <div class="furn-mode-switch" id="furn-mode-switch">
+                  <button class="furn-mode-button furn-mode-button-shop furn-is-active" data-mode="shop">
+                  <i class="fa-solid fa-store"></i>&nbsp;Sklep
+                  </button>
+                  <button class="furn-mode-button furn-mode-button-inventory" data-mode="inventory">
+                  <i class="fa-solid fa-box-open"></i>&nbsp;Magazyn
+                  </button>
+               </div>
+            </div>
+            <div class="furn-tools-row">
+               <input id="furn-search" class="furn-input" placeholder="Szukaj…">
+               <select id="furn-sort" class="furn-select"></select>
+            </div>
+            <div class="furn-preset-bar" id="furn-preset-bar">
+               <div class="furn-preset-wrap">
+                  <span class="furn-tag">Presety</span>
+                  <select id="furn-preset-select" class="furn-preset-select"></select>
+               </div>
+               <button class="furn-secondary-button" id="furn-preset-new">
+               <i class="fa-solid fa-plus"></i>
+               </button>
+               <button class="furn-secondary-button" id="furn-preset-delete">
+               <i class="fa-solid fa-trash"></i>
+               </button>
+               <button class="furn-secondary-button" id="furn-preset-set-active">
+               <i class="fa-solid fa-check"></i>
+               </button>	  
+            </div>
+            <div class="furn-filter-row">
+               <select id="furn-filter" class="furn-select"></select>
+            </div>
+            <div id="furn-sections" class="furn-section-scroll"></div>
+            <div id="furn-cart-footer" class="furn-cart-footerbar" style="display:none;">
+               <div class="furn-cart-total" id="furn-cart-total">Razem: $0</div>
+               <div>
+                  <button class="furn-secondary-button" id="furn-cart-clear">
+                  <i class="fa-solid fa-trash"></i>&nbsp;Wyczyść
+                  </button>
+                  <button class="furn-secondary-button" id="furn-cart-purchase">
+                  <i class="fa-solid fa-credit-card"></i>&nbsp;Kup
+                  </button>
+               </div>
+            </div>
+         </section>
+         <aside class="furn-panel furn-sidebar">
+            <div class="furn-sidebar-header">
+               <span class="furn-label">Kategorie</span>
+               <button id="furn-toggle-sidebar" class="furn-sidebar-toggle">
+               <i class="fa-solid fa-chevron-left"></i>
+               </button>
+            </div>
+            <div id="furn-category-list" class="furn-category-list"></div>
+         </aside>
+      </div>
+      <div class="furn-modal" id="furn-inventory-modal">
+         <div class="furn-modal-card">
+            <div class="furn-modal-header">
+               <i class="fa-solid fa-box-open"></i><span id="furn-inventory-title">Przedmiot</span>
+               <span class="furn-spacer"></span>
+               <button class="furn-icon-close" id="furn-inventory-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="furn-modal-body" id="furn-inventory-body"></div>
+            <div class="furn-transfer">
+               <button class="furn-transfer-toggle" id="furn-transfer-mini">
+               <i class="fa-solid fa-right-left"></i><span>Przenieś</span>
+               </button>
+               <div class="furn-transfer-panel" id="furn-transfer-panel">
+                  <div class="furn-hint">Przenieś ten mebel do innego presetu:</div>
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                     <span class="furn-tag">Do presetu</span>
+                     <select id="furn-transfer-target" class="furn-preset-select" style="min-width:220px;"></select>
+                     <button class="furn-button" id="furn-transfer-confirm">
+                     <i class="fa-solid fa-right-left"></i>&nbsp;Przenieś
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="furn-modal-actions">
+               <button class="furn-button furn-button-ghost" id="furn-remove-item">
+               <i class="fa-solid fa-trash"></i>&nbsp;Usuń
+               </button>
+               <button class="furn-button furn-button-primary" id="furn-edit-item">
+               <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edytuj
+               </button>
+               <button class="furn-button furn-button-primary" id="furn-place-item" style="display:none;">
+               <i class="fa-solid fa-couch"></i>&nbsp;Umieść
+               </button>
+            </div>
+         </div>
+      </div>
+      <div class="furn-modal" id="furn-buy-modal">
+         <div class="furn-modal-card">
+            <div class="furn-modal-header">
+               <i class="fa-solid fa-cart-plus"></i><span id="furn-buy-title">Zakup</span>
+               <span class="furn-spacer"></span>
+               <button class="furn-icon-close" id="furn-buy-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="furn-modal-body" id="furn-buy-body"></div>
+            <div class="furn-modal-actions">
+               <button class="furn-button furn-button-ghost" id="furn-buy-cancel">Anuluj</button>
+               <button class="furn-button furn-button-primary" id="furn-buy-confirm">
+               <i class="fa-solid fa-cart-shopping"></i>&nbsp;<span id="furn-buy-confirm-label">Kup</span>
+               </button>
+            </div>
+         </div>
+      </div>
+      <div class="furn-modal" id="furn-confirm-modal">
+         <div class="furn-modal-card">
+            <div class="furn-modal-header">
+               <i class="fa-solid fa-triangle-exclamation"></i><span id="furn-confirm-title">Potwierdź</span>
+               <span class="furn-spacer"></span>
+               <button class="furn-icon-close" id="furn-confirm-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="furn-modal-body" id="furn-confirm-text">Czy jesteś pewien?</div>
+            <div class="furn-modal-actions">
+               <button class="furn-button furn-button-ghost" id="furn-confirm-cancel">Anuluj</button>
+               <button class="furn-button furn-button-danger" id="furn-confirm-ok">Usuń</button>
+            </div>
+         </div>
+      </div>
+      <div class="furn-modal" id="furn-preset-modal">
+         <div class="furn-modal-card">
+            <div class="furn-modal-header">
+               <i class="fa-solid fa-folder-plus"></i><span>Utwórz preset</span>
+               <span class="furn-spacer"></span>
+               <button class="furn-icon-close" id="furn-preset-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="furn-modal-body">
+               <input id="furn-preset-name" class="furn-input" placeholder="Nazwa presetu (np. Główny Dom)"/>
+            </div>
+            <div class="furn-modal-actions">
+               <button class="furn-button furn-button-ghost" id="furn-preset-cancel">Anuluj</button>
+               <button class="furn-button furn-button-primary" id="furn-preset-create"><i class="fa-solid fa-folder-plus"></i> Utwórz</button>
+            </div>
+         </div>
+      </div>
+      <div class="furn-modal" id="furn-cart-dest-modal">
+         <div class="furn-modal-card">
+            <div class="furn-modal-header">
+               <i class="fa-solid fa-house-circle-check"></i>
+               <span>Wybierz miejsce docelowe</span>
+               <span class="furn-spacer"></span>
+               <button class="furn-icon-close" id="furn-cart-dest-close">
+               <i class="fa-solid fa-xmark"></i>
+               </button>
+            </div>
+            <div class="furn-modal-body">
+               <div class="furn-cart-destination">
+                  <div class="furn-cart-dest-header">
+                     <span class="furn-tag">Wyślij do nieruchomości</span>
+                  </div>
+                  <div class="furn-cart-dest-body">
+                     <select id="furn-cart-house" class="furn-select"></select>
+                     <div id="furn-cart-placement-group" class="furn-cart-placement-group">
+                        <button id="furn-cart-placement-inside"
+                           class="furn-secondary-button"
+                           data-placement="inside">Wewnątrz</button>
+                        <button id="furn-cart-placement-outside"
+                           class="furn-secondary-button"
+                           data-placement="outside">Na zewnątrz</button>
+                     </div>
+                  </div>
+                  <div id="furn-cart-dest-hint" class="furn-cart-dest-hint"></div>
+               </div>
+               <div id="furn-cart-dest-summary" class="furn-cart-dest-summary"></div>
+            </div>
+            <div class="furn-modal-actions">
+               <button class="furn-button furn-button-ghost" id="furn-cart-dest-cancel">
+               Anuluj
+               </button>
+               <button class="furn-button furn-button-primary" id="furn-cart-dest-confirm">
+               <i class="fa-solid fa-credit-card"></i>&nbsp;Kup
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="cam-root">
+      <div class="cam-vignette cam-noise"></div>
+      <div class="cam-frame-corner tl"></div>
+      <div class="cam-frame-corner tr"></div>
+      <div class="cam-frame-corner bl"></div>
+      <div class="cam-frame-corner br"></div>
+      <div class="cam-ui">
+         <div class="cam-top">
+            <div class="cam-block-small">
+               <div id="cam-chip-mode" class="cam-chip cam-chip-mode mode-rec">
+                  <span class="cam-rec-dot"></span>
+                  <span id="cam-mode-text">REC</span>
+               </div>
+            </div>
+            <div class="cam-top-right">
+               <div class="cam-time-block">
+                  <div>
+                     <div class="cam-label-tag">TIME</div>
+                     <div id="cam-time" class="cam-time-main">00:00:00</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="cam-bottom">
+            <div class="cam-bottom-left">
+               <div class="cam-info-bottom">
+                  <div id="cam-name-bottom" class="cam-name-bottom">KAMERA 01</div>
+                  <div id="cam-location-bottom" class="cam-location-bottom">Północne Skrzydło</div>
+               </div>
+            </div>
+            <div class="cam-bottom-right">
+               <div class="cam-nav">
+                  <span class="cam-key cam-key-arrow">&#x2190;</span>
+                  <span class="cam-nav-label">Poprz.</span>
+                  <span class="cam-sep">/</span>
+                  <span class="cam-key cam-key-arrow">&#x2192;</span>
+                  <span class="cam-nav-label">Nast.</span>
+                  <span class="cam-sep">·</span>
+                  <span class="cam-key">E</span>
+                  <span class="cam-nav-label">Wyjście</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="door-root">
+      <div class="cam-vignette cam-noise"></div>
+      <div class="cam-frame-corner tl"></div>
+      <div class="cam-frame-corner tr"></div>
+      <div class="cam-frame-corner bl"></div>
+      <div class="cam-frame-corner br"></div>
+      <div class="door-ui">
+         <div class="door-top">
+            <div class="door-tag">
+               <span class="door-tag-dot"></span>
+               <span>DOOR CAM</span>
+            </div>
+            <div class="door-time-block">
+               <div>
+                  <div class="door-label-tag">TIME</div>
+                  <div id="door-time" class="door-time-main">00:00:00</div>
+               </div>
+            </div>
+         </div>
+         <div class="door-bottom">
+            <div class="door-bottom-left">
+               <div class="door-info-bottom">
+                  <div id="door-name" class="door-name">DRZWI GŁÓWNE</div>
+                  <div id="door-location" class="door-location">Mieszkanie 3A</div>
+               </div>
+            </div>
+            <div class="door-bottom-right">
+               <div class="door-exit-pill">
+                  <span class="door-key">E</span>
+                  <span class="door-exit-label">Wyjdź z kamery</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="saferoot">
+      <div id="pin-root" class="pin-root">
+         <div class="pin-panel">
+            <div class="pin-top">
+               <div class="pin-title-wrap">
+                  <div class="pin-title">
+                     <i class="fa-solid fa-lock"></i>
+                     <span id="pin-title">Skarbiec</span>
+                  </div>
+               </div>
+               <div class="pin-top-actions">
+                  <button id="btn-pin-set" class="safe-btn setpin" style="display:none;" title="Ustaw nowy PIN">
+                  <i class="fa-solid fa-key"></i>
+                  </button>
+                  <button id="btn-pin-close" class="safe-btn" title="Zamknij">
+                  <i class="fa-solid fa-xmark"></i>
+                  </button>
+               </div>
+            </div>
+            <div class="pin-display-wrap">
+               <div class="pin-display" id="pin-display">
+                  <span id="pin-placeholder" class="pin-display-placeholder">Wprowadź PIN</span>
+               </div>
+               <div id="pin-status" class="pin-status-text">Wpisz swój PIN i naciśnij POTWIERDŹ.</div>
+            </div>
+            <div class="pin-grid">
+               <button class="pin-key" data-digit="1"><span>1</span></button>
+               <button class="pin-key" data-digit="2"><span>2</span></button>
+               <button class="pin-key" data-digit="3"><span>3</span></button>
+               <button class="pin-key" data-digit="4"><span>4</span></button>
+               <button class="pin-key" data-digit="5"><span>5</span></button>
+               <button class="pin-key" data-digit="6"><span>6</span></button>
+               <button class="pin-key" data-digit="7"><span>7</span></button>
+               <button class="pin-key" data-digit="8"><span>8</span></button>
+               <button class="pin-key" data-digit="9"><span>9</span></button>
+               <button class="pin-key pin-key-aux" data-action="clear"><span>C</span></button>
+               <button class="pin-key" data-digit="0"><span>0</span></button>
+               <button class="pin-key pin-key-aux pin-key-confirm" data-action="confirm"><span>E</span></button>
+            </div>
+            <div class="pin-footer-hint">
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="pm-root">
+      <section class="pm-panel">
+         <header class="pm-topbar">
+            <div class="pm-title">
+               <div class="pm-title-main">
+                  <i class="fa-solid fa-building"></i>
+                  <span>Rynek Nieruchomości</span>
+               </div>
+               <div class="pm-title-sub" id="pm-subtitle">Przeglądaj nieruchomości na sprzedaż i wynajem.</div>
+            </div>
+            <div class="pm-top-actions">
+               <button class="pm-icon-btn" id="pm-btn-refresh"><i class="fa-solid fa-rotate-right"></i></button>
+               <button class="pm-icon-btn" id="pm-btn-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+         </header>
+         <main class="pm-main">
+            <aside class="pm-card pm-card-filters">
+               <div class="pm-card-head">
+                  <div class="pm-card-title">
+                     <i class="fa-solid fa-magnifying-glass"></i>
+                     <span>Wyszukiwanie i filtry</span>
+                  </div>
+               </div>
+               <div>
+                  <div class="pm-group-label">Szukaj</div>
+                  <input id="pm-search" class="pm-input" type="text" placeholder="Nazwa lub adres…">
+               </div>
+               <div>
+                  <div class="pm-group-label">Typ oferty</div>
+                  <select id="pm-filter-status" class="pm-select">
+                     <option value="all">Wszystkie</option>
+                     <option value="sale">Tylko na sprzedaż</option>
+                     <option value="rent">Tylko do wynajęcia</option>
+                     <option value="sale_or_rent">Sprzedaż lub wynajem</option>
+                     <option value="rent_only">Tylko wynajem</option>
+                  </select>
+               </div>
+               <div>
+                  <div class="pm-group-label">Sprzedawca</div>
+                  <select id="pm-filter-seller" class="pm-select">
+                     <option value="all">Wszyscy sprzedawcy</option>
+                     <option value="agency">Tylko biuro nieruchomości</option>
+                     <option value="player">Tylko gracze</option>
+                  </select>
+               </div>
+               <div>
+                  <div class="pm-group-label">Typ</div>
+                  <select id="pm-filter-type" class="pm-select">
+                     <option value="all">Wszystkie typy</option>
+                     <option value="MLO">MLO</option>
+                     <option value="IPL">IPL</option>
+                     <option value="SHELL">Shell</option>
+                  </select>
+               </div>
+               <div>
+                  <div class="pm-group-label">Cena (sprzedaż)</div>
+                  <input id="pm-price-min" class="pm-input" type="number" min="0" placeholder="Min">
+                  <input id="pm-price-max" class="pm-input" type="number" min="0" placeholder="Max">		  
+                  <div class="pm-row">
+                  </div>
+               </div>
+               <div class="pm-row" style="margin-top:4px;">
+                  <button class="pm-btn" id="pm-btn-clear"><i class="fa-solid fa-eraser"></i> Wyczyść</button>
+                  <button class="pm-btn pm-btn-primary" id="pm-btn-apply"><i class="fa-solid fa-check"></i> Zastosuj</button>
+               </div>
+            </aside>
+            <section class="pm-list-wrap">
+               <div class="pm-list-head">
+                  <div class="pm-card-title">
+                     <i class="fa-regular fa-rectangle-list"></i>
+                     <span>Oferty</span>
+                  </div>
+                  <div class="pm-count" id="pm-count-label">0 wyników</div>
+               </div>
+               <div id="pm-list" class="pm-list"></div>
+            </section>
+         </main>
+      </section>
+   </div>
+   <div class="pm-modal" id="pm-modal-detail">
+      <div class="pm-modal-card pm-modal-card-wide">
+         <div class="pm-modal-head">
+            <b id="pm-detail-title">Nieruchomość</b>
+            <button class="pm-icon-btn pm-modal-close" data-close="#pm-modal-detail"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="pm-modal-body">
+            <div class="pm-detail-slider" data-id="" data-index="0">
+               <img class="pm-slider-img" src="" alt="">
+               <button class="pm-slider-arrow pm-slider-arrow-left" data-dir="-1"><i class="fa-solid fa-chevron-left"></i></button>
+               <button class="pm-slider-arrow pm-slider-arrow-right" data-dir="1"><i class="fa-solid fa-chevron-right"></i></button>
+               <div class="pm-slider-dots" id="pm-detail-dots"></div>
+            </div>
+            <div id="pm-detail-sub" class="pm-small-muted"></div>
+            <div class="pm-detail-prices" id="pm-detail-prices"></div>
+            <div class="pm-meta-grid">
+               <div class="pm-meta-box">
+                  <div class="pm-meta-label">Sprzedawca</div>
+                  <div class="pm-meta-value" id="pm-detail-seller">—</div>
+               </div>
+               <div class="pm-meta-box">
+                  <div class="pm-meta-label">Telefon sprzedawcy</div>
+                  <div class="pm-meta-value" id="pm-detail-phone">—</div>
+               </div>
+               <div class="pm-meta-box">
+                  <div class="pm-meta-label">Typ nieruchomości</div>
+                  <div class="pm-meta-value" id="pm-detail-type">—</div>
+               </div>
+               <div class="pm-meta-box">
+                  <div class="pm-meta-label">Oferta</div>
+                  <div class="pm-meta-value" id="pm-detail-flags">—</div>
+               </div>
+            </div>
+            <div>
+               <div class="pm-group-label" style="margin-bottom:4px;">Opis</div>
+               <div class="pm-desc" id="pm-detail-description">Brak opisu.</div>
+            </div>
+            <div class="pm-modal-footer">
+               <button class="pm-btn" id="pm-btn-detail-info"><i class="fa-solid fa-circle-info"></i> Informacje o nieruchomości</button>
+               <button class="pm-btn" id="pm-btn-detail-utilities"><i class="fa-solid fa-bolt"></i> Media</button>
+               <span style="flex:1"></span>
+               <button class="pm-btn" id="pm-btn-detail-gps"><i class="fa-solid fa-location-crosshairs"></i> Zaznacz na GPS</button>
+               <button class="pm-btn" id="pm-btn-detail-rent"><i class="fa-solid fa-key"></i> Wynajmij nieruchomość</button>
+               <button class="pm-btn pm-btn-primary" id="pm-btn-detail-buy"><i class="fa-solid fa-cart-shopping"></i> Kup nieruchomość</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="pm-modal" id="pm-modal-info">
+      <div class="pm-modal-card">
+         <div class="pm-modal-head">
+            <b>Informacje o nieruchomości</b>
+            <button class="pm-icon-btn pm-modal-close" data-close="#pm-modal-info"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="pm-modal-body" id="pm-info-body"></div>
+      </div>
+   </div>
+   <div class="pm-modal" id="pm-modal-utilities">
+      <div class="pm-modal-card">
+         <div class="pm-modal-head">
+            <b>Media</b>
+            <button class="pm-icon-btn pm-modal-close" data-close="#pm-modal-utilities"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="pm-modal-body">
+            <div class="pm-list-plain">
+               <div class="pm-list-item">
+                  <div class="pm-list-main">
+                     <span>Prąd</span>
+                     <span id="pm-util-electricity" class="pm-list-note">$0</span>
+                  </div>
+                  <span id="pm-util-electricity-rate" class="pm-list-note">—</span>
+               </div>
+               <div class="pm-list-item">
+                  <div class="pm-list-main">
+                     <span>Woda</span>
+                     <span id="pm-util-water" class="pm-list-note">$0</span>
+                  </div>
+                  <span id="pm-util-water-rate" class="pm-list-note">—</span>
+               </div>
+               <div class="pm-list-item">
+                  <div class="pm-list-main">
+                     <span>Internet</span>
+                     <span id="pm-util-internet" class="pm-list-note">$0</span>
+                  </div>
+                  <span id="pm-util-internet-rate" class="pm-list-note">—</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="pm-modal" id="pm-modal-confirm-buy">
+      <div class="pm-modal-card">
+         <div class="pm-modal-head">
+            <b>Potwierdź zakup</b>
+            <button class="pm-icon-btn pm-modal-close" data-close="#pm-modal-confirm-buy"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="pm-modal-body">
+            <span id="pm-confirm-buy-text">Czy na pewno chcesz kupić tę nieruchomość?</span>
+         </div>
+         <div class="pm-modal-footer">
+            <button class="pm-btn pm-modal-close" data-close="#pm-modal-confirm-buy">Anuluj</button>
+            <button class="pm-btn pm-btn-primary" id="pm-btn-confirm-buy-yes">Tak, kup</button>
+         </div>
+      </div>
+   </div>
+   <div class="pm-modal" id="pm-modal-confirm-rent">
+      <div class="pm-modal-card">
+         <div class="pm-modal-head">
+            <b>Potwierdź wynajem</b>
+            <button class="pm-icon-btn pm-modal-close" data-close="#pm-modal-confirm-rent"><i class="fa-solid fa-xmark"></i></button>
+         </div>
+         <div class="pm-modal-body">
+            <span id="pm-confirm-rent-text">Czy na pewno chcesz wynająć tę nieruchomość?</span>
+         </div>
+         <div class="pm-modal-footer">
+            <button class="pm-btn pm-modal-close" data-close="#pm-modal-confirm-rent">Anuluj</button>
+            <button class="pm-btn pm-btn-primary" id="pm-btn-confirm-rent-yes">Tak, wynajmij</button>
+         </div>
+      </div>
+   </div>
+   <div id="listing-root">
+      <section class="pl-panel">
+         <header class="pl-topbar">
+            <div class="pl-title">
+               <div class="pl-title-main">
+                  <i class="fa-solid fa-file-pen"></i>
+                  <span>Oferta Nieruchomości</span>
+               </div>
+               <div class="pl-title-sub">
+                  Ustaw opis, kontakt i ceny dla swojej oferty.
+               </div>
+            </div>
+            <div class="pl-top-actions">
+               <button class="pl-icon-btn" id="pl-btn-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+         </header>
+         <main class="pl-main">
+            <div class="pl-card">
+               <div class="pl-field">
+                  <div class="pl-label">Opis</div>
+                  <textarea id="pl-input-description" class="pl-textarea"
+                     placeholder="Opisz swoją nieruchomość, wnętrze, widok, parking, dodatki…"></textarea>
+               </div>
+               <div class="pl-field">
+                  <div class="pl-label">Numer telefonu</div>
+                  <input id="pl-input-phone" class="pl-input" type="text" placeholder="Twój numer telefonu w grze">
+               </div>
+               <div class="pl-price-block">
+                  <div class="pl-price-head">
+                     <div class="pl-price-title">Zakup</div>
+                     <div class="pl-switch" id="pl-switch-purchase" data-on="false">
+                        <div class="pl-switch-knob"></div>
+                        <span class="pl-switch-label">Wyłączone</span>
+                     </div>
+                  </div>
+                  <div class="pl-price-note">Ustaw cenę, jeśli chcesz, aby nieruchomość była do kupna.</div>
+                  <div class="pl-price-input-row">
+                     <span class="pl-price-prefix">$</span>
+                     <input id="pl-input-purchase-price" class="pl-price-input" type="number" min="0" placeholder="0" disabled>
+                  </div>
+               </div>
+               <div class="pl-price-block">
+                  <div class="pl-price-head">
+                     <div class="pl-price-title">Wynajem</div>
+                     <div class="pl-switch" id="pl-switch-rent" data-on="false">
+                        <div class="pl-switch-knob"></div>
+                        <span class="pl-switch-label">Wyłączone</span>
+                     </div>
+                  </div>
+                  <div class="pl-price-note">Ustaw cenę wynajmu, jeśli chcesz, aby nieruchomość była do wynajęcia</div>
+                  <div class="pl-price-input-row">
+                     <span class="pl-price-prefix">$</span>
+                     <input id="pl-input-rent-price" class="pl-price-input" type="number" min="0" placeholder="0" disabled>
+                  </div>
+               </div>
+               <div class="pl-footer">
+                  <div class="pl-status" id="pl-status-label">
+                     Oferta nie jest jeszcze na rynku.
+                  </div>
+                  <div class="pl-footer-actions">
+                     <button class="pl-btn pl-btn-danger" id="pl-btn-remove" style="display:none;">
+                     <i class="fa-solid fa-ban"></i> Usuń
+                     </button>
+                     <button class="pl-btn pl-btn-primary" id="pl-btn-save">
+                     <i class="fa-solid fa-cloud-arrow-up"></i> Zapisz ofertę
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </main>
+      </section>
+   </div>
+   <div id="help-root">
+      <div class="help-card">
+         <div class="help-accent-bg"></div>
+         <header class="help-header">
+            <div class="help-icon-wrap">
+               <i id="help-icon" class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="help-title-block">
+               <div id="help-title" class="help-title">Tytuł pomocy</div>
+               <div id="help-tagline" class="help-tagline"></div>
+            </div>
+         </header>
+         <section class="help-body">
+            <div id="help-text" class="help-text-main">
+               To jest tekst pomocy. Zostanie nadpisany przez SendNUIMessage.
+            </div>
+            <div id="help-keys-row" class="help-keys-row"></div>
+         </section>
+      </div>
+   </div>
+   <div id="rtx-progress-overlay" class="rtx-progress-backdrop">
+      <div class="rtx-progress-card">
+         <div class="rtx-progress-header">
+            <div class="rtx-progress-title">
+               <i id="rtx-progress-icon" class="fa-solid fa-spinner"></i>
+               <span id="rtx-progress-title">Postęp</span>
+            </div>
+         </div>
+         <div class="rtx-progress-label" id="rtx-progress-label">Otwieranie zamka w drzwiach...</div>
+         <div class="rtx-progress-bar">
+            <div id="rtx-progress-inner" class="rtx-progress-bar-inner"></div>
+         </div>
+         <div class="rtx-progress-footer">
+            <span id="rtx-progress-percent" class="rtx-progress-percent">0%</span>
+            <button id="rtx-progress-cancel" class="rtx-progress-cancel">
+            <i class="fa-solid fa-ban"></i> Anuluj
+            </button>
+         </div>
+      </div>
+   </div>
+   <div id="notify-root">
+      <div id="notify-stack" class="notify-stack"></div>
+   </div>
+   <div id="screenshot">
+      <canvas id="canvas"></canvas>
+   </div>
+   <div class="infonotify-container" id="infonotifyshow">
+      <div class="infonotifytext">Text</div>
+   </div>
+   <div class="gizmoshow-container" id="gizmoshow">
+      <div id="root"></div>
+   </div>
+   <script src="scripts.js"></script>
+   <script src="creator.js"></script>
+   <script src="modals.js"></script>
+   <script src="property.js"></script>
+   <script src="minigame.js"></script>
+   <script src="managment.js"></script>
+   <script src="kitchen.js"></script>
+   <script src="furniture.js"></script>
+   <script src="cameras.js"></script>
+   <script src="safe.js"></script>
+   <script src="notify.js"></script>
+   <script src="realestate.js"></script>
+   <script src="listing.js"></script>
+   <script src="progress.js"></script>
+</body>
+</html>

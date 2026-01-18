@@ -1,0 +1,33 @@
+{
+    "CLIENT": {
+        "NOTIFICATIONS": {
+            "NUMBER_CHANGED": {
+                "TITLE": "Operator Exotic5G",
+                "DESCRIPTION": "Twój nowy numer telefonu to {number}"
+            }
+        },
+        "DEBUG": {
+            "SETTING_NUMBER_FAILED": "Ustawienie nowego numeru nie powiodło się!"
+        }
+    },
+    "SERVER": {
+        "NOTIFICATIONS": {
+            "ERROR": {
+                "TITLE": "Błąd",
+                "MISSING_IDENTIFIER": "Błąd identyfikacji gracza!",
+                "NO_ACTIVE_NUMBER": "Nie masz aktywnego numeru telefonu!",
+                "GENERATE_NUMBER_FAILED": "Nie udało się wygenerować numeru!",
+                "UPDATE_DATABASE_FAILED": "Nie udało się zaktualizować numeru w bazie.",
+                "CHANGE_SIM_FAILED": "Nie udało się zmienić karty SIM."
+            },
+            "SUCCESS": {
+                "TITLE": "Sukces",
+                "SIM_CHANGED": "Zmieniono kartę SIM.",
+                "SIM_REMOVED": "Wyciągnięto kartę SIM z telefonu."
+            }
+        },
+        "DEBUG": {
+            "GIVESIM": "Nadawanie karty SIM z numerem:"
+        }
+    }
+}

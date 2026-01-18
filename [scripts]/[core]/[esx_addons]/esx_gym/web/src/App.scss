@@ -1,0 +1,3553 @@
+@use './components/UpgradeManagement.scss';
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, label, a {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.9, 0.9, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    transform: scale3d(1.05, 1.05, 1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(200%, 0, 0);
+  }
+}
+
+@keyframes shimmer-bg {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+
+.gym-app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f59e0b rgba(255, 255, 255, 0.05);
+}
+
+%component-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+%container-base {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  max-width: 1000px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+}
+
+%header-base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+%title-base {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+}
+
+%button-base {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  
+  &:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+%section-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+}
+
+%card-base {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px) translateZ(0);
+  }
+}
+
+.gym-main-menu {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+  }
+  
+  &__section-title {
+    @extend %section-title;
+  }
+  
+  &__stats-section {
+    @extend %card-base;
+  }
+  
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+  
+  &__stat-icon {
+    font-size: 1.8rem;
+    color: #f59e0b;
+    min-width: 48px;
+    text-align: center;
+  }
+  
+  &__stat-content {
+    flex: 1;
+  }
+  
+  &__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  
+  &__stat-label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  &__stat-progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    
+    .gym-main-menu__stat-progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      
+      &--strength {
+        background: linear-gradient(90deg, #ef4444, #f97316);
+      }
+      
+      &--stamina {
+        background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      }
+      
+      &--lung {
+        background: linear-gradient(90deg, #10b981, #34d399);
+      }
+    }
+  }
+  
+  &__gym-info {
+    @extend %card-base;
+  }
+  
+  &__gym-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  &__gym-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__gym-label {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  &__gym-value {
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    
+    &--active {
+      color: #10b981;
+    }
+    
+    &--inactive {
+      color: #ef4444;
+    }
+    
+    &--upgraded {
+      color: #f59e0b;
+    }
+    
+    &--basic {
+      color: #6b7280;
+    }
+  }
+  
+  &__membership-section {
+    @extend %card-base;
+  }
+  
+  &__membership-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  &__membership-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__membership-label {
+    color: #9ca3af;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  &__membership-value {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    
+    &--valid {
+      color: #10b981;
+    }
+    
+    &--invalid {
+      color: #ef4444;
+    }
+  }
+  
+  &__actions {
+    @extend %card-base;
+  }
+  
+  &__action-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 100%;
+  }
+  
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    
+    &--primary {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #fff;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      
+      &:hover {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+      }
+    }
+    
+    &--secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    svg {
+      font-size: 1rem;
+    }
+  }
+}
+
+.gym-stats-only {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+    max-width: 500px;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+    font-size: 1.5rem;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+  
+  &__stat-icon {
+    font-size: 2.5rem;
+    color: #f59e0b;
+    min-width: 60px;
+    text-align: center;
+  }
+  
+  &__stat-content {
+    flex: 1;
+  }
+  
+  &__stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  
+  &__stat-label {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  
+  &__stat-progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    
+    .gym-stats-only__stat-progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      
+      &--strength {
+        background: linear-gradient(90deg, #ef4444, #f97316);
+      }
+      
+      &--stamina {
+        background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      }
+      
+      &--lung {
+        background: linear-gradient(90deg, #10b981, #34d399);
+      }
+    }
+  }
+}
+
+.gym-membership-only {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+    max-width: 450px;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+    font-size: 1.5rem;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  &__label {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  &__value {
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    
+    &--yes {
+      color: #10b981;
+      font-weight: 700;
+    }
+    
+    &--no {
+      color: #ef4444;
+      font-weight: 700;
+    }
+  }
+}
+
+.supplement-shop {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  
+  &__item {
+    @extend %card-base;
+  }
+  
+  &__item-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  
+  &__item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  &__item-info {
+    flex: 1;
+  }
+  
+  &__item-name {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  &__item-description {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  &__item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  &__item-stock-label,
+  &__item-price-label {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-right: 8px;
+  }
+  
+  &__item-stock-value,
+  &__item-price-value {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  
+  &__item-buy {
+    width: 100%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+}
+
+.buy-pass {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__passes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  
+  &__pass {
+    @extend %card-base;
+  }
+  
+  &__pass-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  
+  &__pass-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  &__pass-info {
+    flex: 1;
+  }
+  
+  &__pass-name {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  &__pass-description {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  &__pass-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  &__pass-duration-label,
+  &__pass-price-label {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-right: 8px;
+  }
+  
+  &__pass-duration-value,
+  &__pass-price-value {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  
+  &__pass-buy {
+    width: 100%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+}
+
+.inventory-management {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__inventory {
+    @extend %card-base;
+  }
+  
+  &__inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  &__inventory-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+  
+  &__inventory-summary {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  
+  &__item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__item-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  
+  &__item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #fff;
+  }
+  
+  &__item-name {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  &__item-description {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  &__item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  &__item-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  &__item-stock-label {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  &__item-stock-value {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    
+    &--high {
+      color: #10b981;
+    }
+    
+    &--medium {
+      color: #f59e0b;
+    }
+    
+    &--low {
+      color: #ef4444;
+    }
+  }
+  
+  &__item-status {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    
+    &--high {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+    
+    &--medium {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+    }
+    
+    &--low {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+  }
+  
+  &__item-progress {
+    margin-top: 10px;
+  }
+  
+  &__item-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+  
+  &__item-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  
+  &__item-progress-text {
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+  
+  &__actions {
+    @extend %card-base;
+  }
+  
+  &__action-info {
+    text-align: center;
+  }
+  
+  &__action-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__action-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  &__delivery-btn {
+    @extend %button-base;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    
+    &:hover {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__delivery {
+    @extend %card-base;
+  }
+
+  &__delivery-header {
+    margin-bottom: 20px;
+  }
+
+  &__delivery-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+
+  &__delivery-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__delivery-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__delivery-item-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+
+  &__delivery-item-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+
+  &__delivery-item-info {
+    flex: 1;
+  }
+
+  &__delivery-item-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  &__delivery-item-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+
+  &__delivery-item-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  &__delivery-item-price-label {
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+
+  &__delivery-item-price-value {
+    color: #10b981;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__delivery-item-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__delivery-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__delivery-item-quantity-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  &__delivery-item-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__delivery-item-quantity-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    font-weight: 600;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__delivery-item-quantity-input {
+    width: 60px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    &:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    }
+  }
+
+  &__delivery-item-total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  &__delivery-item-total-label {
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+
+  &__delivery-item-total-value {
+    color: #f59e0b;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  &__delivery-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__delivery-total {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__delivery-total-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+
+  &__delivery-total-value {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__delivery-order-btn {
+    @extend %button-base;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &--loading {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.worker-hire {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__players {
+    @extend %card-base;
+  }
+  
+  &__players-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  &__players-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+  
+  &__players-count {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    
+    svg {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+  }
+  
+  &__empty-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__empty-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  &__players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  &__player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  &__player-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  &__player-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+  
+  &__player-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  &__player-id {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__player-hire {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__info-section {
+    @extend %card-base;
+  }
+  
+  &__info-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  &__info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &__info-item {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    
+    &::before {
+      content: '•';
+      color: #f59e0b;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.worker-management {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__workers {
+    @extend %card-base;
+  }
+  
+  &__workers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  &__workers-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+  
+  &__workers-count {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    
+    svg {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+  }
+  
+  &__empty-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__empty-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  &__workers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  &__worker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  &__worker-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  &__worker-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+  
+  &__worker-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  &__worker-id {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  &__worker-rank {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  &__worker-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  &__worker-promote,
+  &__worker-demote,
+  &__worker-fire {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+  }
+  
+  &__worker-promote {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__worker-demote {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__worker-fire {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__info-section {
+    @extend %card-base;
+  }
+  
+  &__info-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  &__ranks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  &__rank {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 90px;
+    height: 100%;
+    overflow: hidden;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+  }
+  
+  &__rank-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+  
+  &__rank-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  &__rank-name {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  &__rank-description {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  &__permissions {
+    margin-top: 20px;
+    
+    h4 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        color: #9ca3af;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        padding-left: 10px;
+        position: relative;
+        
+        &::before {
+          content: "•";
+          color: #f59e0b;
+          font-weight: bold;
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &__worker-salary {
+    color: #10b981;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+
+  &__container {
+    max-width: 1400px !important;
+    width: 98% !important;
+  }
+
+  &__ranks {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  &__rank {
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__worker {
+    padding: 25px;
+    margin-bottom: 15px;
+  }
+
+  &__worker-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  &__worker-name {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  &__worker-id {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  &__worker-rank {
+    font-size: 0.9rem;
+    padding: 4px 12px;
+  }
+
+  &__worker-actions {
+    gap: 15px;
+  }
+
+  &__worker-promote,
+  &__worker-demote,
+  &__worker-fire {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.restock-management {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__stock {
+    @extend %card-base;
+  }
+  
+  &__stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  &__stock-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+  
+  &__stock-summary {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  &__item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__item-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  &__item-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+  
+  &__item-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  &__item-stock {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__item-details {
+    margin-bottom: 15px;
+  }
+  
+  &__item-progress {
+    margin-bottom: 10px;
+  }
+  
+  &__item-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+  
+  &__item-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  
+  &__item-progress-text {
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+  
+  &__item-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  &__item-cost-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__item-cost-value {
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  &__action {
+    @extend %card-base;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &__action-info {
+    flex: 1;
+  }
+  
+  &__action-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  &__action-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  &__action-cost {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  &__action-cost-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__action-cost-value {
+    color: #f59e0b;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  &__action-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+    justify-content: center;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--delivery {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: #fff;
+      
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      }
+    }
+    
+    &--buy {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #059669, #047857);
+      }
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+}
+
+.price-management {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__info {
+    @extend %card-base;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    color: #9ca3af;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  &__prices {
+    @extend %card-base;
+  }
+  
+  &__prices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  &__prices-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+  
+  &__prices-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  &__save-btn {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  &__item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__item-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  &__item-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+  
+  &__item-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  &__item-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__item-price {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  &__item-price-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  &__item-price-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  &__item-price-field {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    
+    &:focus {
+      outline: none;
+      border-color: #f59e0b;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    &[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  }
+  
+  &__item-price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  &__item-price-current {
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+  
+  &__item-price-change {
+    color: #f59e0b;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  &__info-section {
+    @extend %card-base;
+  }
+  
+  &__info-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  &__info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &__info-item {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    
+    &::before {
+      content: '•';
+      color: #f59e0b;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.gym-purchase {
+  @extend %component-base;
+  
+  &__container {
+    @extend %container-base;
+  }
+  
+  &__header {
+    @extend %header-base;
+  }
+  
+  &__back {
+    @extend %button-base;
+  }
+  
+  &__title {
+    @extend %title-base;
+  }
+  
+  &__close {
+    @extend %button-base;
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  &__gym-info {
+    @extend %card-base;
+  }
+  
+  &__gym-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  &__gym-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  &__gym-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  &__gym-id {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__gym-status {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  &__status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+  }
+  
+  &__status-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__status-value {
+    color: #fff;
+    font-weight: 600;
+    
+    &--owned {
+      color: #ef4444;
+    }
+    
+    &--available {
+      color: #10b981;
+    }
+    
+    &--unavailable {
+      color: #6b7280;
+    }
+    
+    &--active {
+      color: #10b981;
+    }
+    
+    &--inactive {
+      color: #ef4444;
+    }
+  }
+  
+  &__purchase-section {
+    @extend %card-base;
+  }
+  
+  &__price {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  &__price-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  &__price-value {
+    color: #f59e0b;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  &__price-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__purchase-info {
+    text-align: center;
+  }
+  
+  &__purchase-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  &__purchase-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    text-align: left;
+  }
+  
+  &__purchase-benefit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    
+    svg {
+      color: #10b981;
+      font-size: 0.8rem;
+    }
+  }
+  
+  &__purchase-btn {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+    
+    &--loading {
+      background: #6b7280;
+    }
+  }
+  
+  &__owned-info,
+  &__unavailable-info {
+    text-align: center;
+    padding: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+  }
+  
+  &__owned-title,
+  &__unavailable-title {
+    color: #ef4444;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  &__owned-description,
+  &__unavailable-description {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  &__info-section {
+    @extend %card-base;
+  }
+  
+  &__info-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  &__info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  &__info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  &__info-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  
+  &__info-value {
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+
+@media (max-width: 480px) {
+  %container-base {
+    padding: 15px;
+    max-width: 98%;
+    margin: 10px auto;
+  }
+  
+  %title-base {
+    font-size: 1.5rem;
+  }
+  
+  %header-base {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  
+  %button-base {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    &__action-buttons {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    
+    &__gym-details {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    &__membership-info {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    &__item {
+      padding: 15px;
+    }
+    
+    &__item-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+    
+    &__item-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    &__workers-list {
+      gap: 10px;
+    }
+    
+    &__worker {
+      padding: 15px;
+    }
+    
+    &__worker-header {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  .inventory-management {
+    &__delivery-item {
+      padding: 15px;
+    }
+    
+    &__delivery-item-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+    
+    &__delivery-item-controls {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    &__delivery-summary {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  %container-base {
+    padding: 20px;
+    max-width: 95%;
+  }
+  
+  %title-base {
+    font-size: 1.8rem;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  .inventory-management {
+    &__delivery-items {
+      gap: 15px;
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  %container-base {
+    padding: 25px;
+    max-width: 90%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  %container-base {
+    padding: 30px;
+    max-width: 1100px;
+    width: 85%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 2559px) {
+  %container-base {
+    padding: 40px;
+    max-width: 1300px;
+    width: 75%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  %container-base {
+    padding: 10px;
+    max-width: 99%;
+  }
+  
+  %title-base {
+    font-size: 1.3rem;
+  }
+  
+  %button-base {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      gap: 10px;
+    }
+    
+    &__action-buttons {
+      gap: 8px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__item {
+      padding: 12px;
+    }
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  %container-base {
+    padding: 15px;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+}
+
+@media (min-height: 1200px) {
+  %container-base {
+    max-height: 90vh;
+  }
+  
+  .gym-main-menu {
+    &__content {
+      gap: 40px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  %container-base {
+    padding: 8px;
+    max-width: 99.5%;
+  }
+  
+  %title-base {
+    font-size: 1.2rem;
+  }
+  
+  %button-base {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      gap: 8px;
+    }
+    
+    &__action-buttons {
+      gap: 6px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__item {
+      padding: 10px;
+    }
+    
+    &__item-name {
+      font-size: 0.9rem;
+    }
+    
+    &__item-description {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  %container-base {
+    padding: 25px;
+    max-width: 90%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  %container-base {
+    padding: 30px;
+    max-width: 85%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1920px) {
+  %container-base {
+    padding: 40px;
+    max-width: 1200px;
+    width: 65%;
+    max-height: 98vh;
+    overflow-y: auto;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+    
+    &__content {
+      gap: 35px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1920px) and (max-width: 1920px) and (min-height: 1080px) and (max-height: 1080px) {
+  %container-base {
+    padding: 35px;
+    max-width: 85%;
+    max-height: 96vh;
+    overflow-y: auto;
+  }
+  
+  .gym-main-menu {
+    &__content {
+      gap: 30px;
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  }
+}
+
+@media (min-width: 1920px) and (max-height: 1080px) {
+  %container-base {
+    padding: 30px;
+    max-width: 1100px;
+    width: 60%;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .gym-main-menu {
+    &__content {
+      gap: 25px;
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    
+    &__stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .gym-main-menu {
+    &__stat-value {
+      font-size: 1.5rem;
+    }
+    
+    &__stat-label {
+      font-size: 0.8rem;
+    }
+    
+    &__gym-name {
+      font-size: 1.2rem;
+    }
+    
+    &__gym-price {
+      font-size: 1rem;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__item-price {
+      font-size: 1.1rem;
+    }
+    
+    &__item-name {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  %button-base {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .gym-main-menu {
+    &__action-btn {
+      min-height: 50px;
+      padding: 12px 20px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__item-btn {
+      min-height: 44px;
+      padding: 10px 16px;
+    }
+  }
+  
+  .inventory-management {
+    &__delivery-item-quantity-btn {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    &__delivery-item-quantity-input {
+      min-height: 44px;
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  %container-base {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .gym-main-menu {
+    &__stat-card {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  %button-base {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .gym-main-menu {
+    &__action-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  %button-base {
+    transition: none;
+  }
+  
+  .gym-main-menu {
+    &__action-btn {
+      transition: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .gym-main-menu {
+    &__section-title {
+      font-size: 1.1rem;
+    }
+    
+    &__gym-label {
+      font-size: 0.9rem;
+    }
+    
+    &__membership-type {
+      font-size: 0.9rem;
+    }
+    
+    &__membership-expires {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__section-title {
+      font-size: 1.1rem;
+    }
+    
+    &__item-description {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+  }
+  
+  .worker-management {
+    &__section-title {
+      font-size: 1.1rem;
+    }
+    
+    &__rank-name {
+      font-size: 0.9rem;
+    }
+    
+    &__rank-description {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .gym-main-menu {
+    &__gym-details {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    &__gym-info {
+      width: 100%;
+    }
+    
+    &__gym-price {
+      margin-top: 10px;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__item-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    &__item-info {
+      width: 100%;
+    }
+    
+    &__item-price {
+      margin-top: 10px;
+      align-self: flex-start;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .gym-main-menu {
+    &__content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+  
+  .worker-management {
+    &__container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 1024px) and (max-height: 768px) {
+  %container-base {
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+  
+  .gym-main-menu {
+    &__content {
+      gap: 25px;
+    }
+  }
+}
+
+@media (min-width: 2560px) {
+  %container-base {
+    max-width: 1500px;
+    width: 65%;
+  }
+  
+  .gym-main-menu {
+    &__stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    &__action-buttons {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  }
+  
+  .supplement-shop,
+  .buy-pass,
+  .inventory-management,
+  .restock-management,
+  .price-management {
+    &__items {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  .worker-management {
+    &__ranks {
+      grid-template-columns: repeat(7, 1fr);
+    }
+  }
+}

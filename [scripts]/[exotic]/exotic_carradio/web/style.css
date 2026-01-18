@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: transparent;
+}
+
+:root {
+  font-size: min(0.83333333vw, 1.8009478673vh);
+  transition: font-size 0.15s linear;
+  --bg-color: #07080d;
+}
+
+.radio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: none;
+  flex-direction: column;
+  gap: 5rem;
+  width: 65rem;
+  overflow: hidden;
+}
+
+.radio::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 12.5rem;
+  height: 12.5rem;
+  background-color: #ff8000;
+  border-radius: 50%;
+  filter: blur(10rem);
+  z-index: 0;
+}
+
+.top-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.song-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.song-wrapper > span:nth-child(2) {
+  font-size: 1.45rem;
+  font-weight: 600;
+  width: 30rem;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.slots-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff13;
+  padding: 1rem 1.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.bottom-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.radio-input {
+  display: flex;
+  background-color: #07080d;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #ffffff1b;
+  z-index: 1;
+  justify-content: space-between;
+}
+
+.radio-input:first-child {
+  width: 50%;
+}
+
+.radio-input:not(:first-child) {
+  width: 25%;
+}
+
+.radio-input:last-child {
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.radio-input > div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.radio-btn {
+  background-color: #ffffff13;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.radio-btn:hover,
+.slot:hover {
+  background-color: #ffffff39;
+}
+
+.radio-input:last-child {
+  padding: 1rem;
+  cursor: pointer;
+  transition: filter 100ms ease;
+}
+
+.radio-input:last-child:hover {
+  filter: brightness(120%);
+}
+
+input {
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: #ffffff00;
+  width: 80%;
+  font-size: 1rem;
+}

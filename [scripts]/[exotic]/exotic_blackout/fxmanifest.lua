@@ -1,0 +1,20 @@
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
+
+shared_scripts {
+    '@es_extended/imports.lua',
+    '@esx_hash/hasher.lua',
+    '@ox_lib/init.lua'
+}
+
+server_scripts {
+    "server/main.lua",
+}
+
+ui_page 'html/ui.html'
+
+files {
+    'html/ui.html',
+    'html/sounds/*.ogg'
+}

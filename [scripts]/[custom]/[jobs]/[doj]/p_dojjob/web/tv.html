@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOJ JOB - TV DUI</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sacramento&display=swap');
+
+    * {
+        box-sizing: border-box;
+        user-select: none;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    :root {
+        font-size: min(.83333333vw, 1.8009478673vh);
+        transition: font-size .15s linear;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    .app-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #080706;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app-wrapper::after {
+        content: "";
+        position: absolute;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f2a557;
+        filter: blur(60rem);
+    }
+
+    .app-wrapper img {
+        position: absolute;
+        width: 30rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: .02;
+    }
+
+    .app-title {
+        font-size: 3rem;
+        width: 100%;
+        padding-top: 1rem;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    font {
+        color: rgb(248, 199, 23);
+    }
+
+    .table-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        background-color: #1c1a17;
+        padding: 1rem;
+        border: .0625rem solid rgba(128, 128, 128, 0.193);
+        overflow: hidden;
+        margin-top: 1rem;
+    }
+
+    .table-header::after {
+        content: "";
+        position: absolute;
+        width: 5rem;
+        height: 5rem;
+        background-color: gray;
+        border-radius: 50%;
+        filter: blur(10rem);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .table-header span,
+    .table-row span {
+        width: calc(100% / 5);
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-transform: uppercase;
+    }
+
+    .table-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        background-color: #131110;
+        padding: 1rem;
+        border: .0625rem solid rgba(128, 128, 128, 0.193);
+        overflow: hidden;
+        margin-top: .75rem;
+        animation: fade-in 1s ease-in-out;
+        animation-delay: calc(0.1s * var(--i));
+    }
+
+    @keyframes fade-in {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<body>
+    <div class="app-wrapper">
+        <img src="img/doj.png" alt="">
+        <span class="app-title">INCOMING <font>COURT HEARINGS</font></span>
+        <div class="table-header">
+            <span>ID</span>
+            <span>JUDGE</span>
+            <span>PROSECUTOR</span>
+            <span>LAWYER</span>
+            <span>ACCUSED</span>
+            <span>ROOM</span>
+            <span>DATE</span>
+        </div>
+        <div class="table-columns">
+        </div>
+    </div>
+</body>
+<script>
+    const appWrapper = document.querySelector('.app-wrapper');
+    window.addEventListener("message", (event) => {
+        const data = event.data;
+        switch (data.action) {
+            case 'loadTV':
+                appWrapper.innerHTML = `
+                <img src="img/doj.png" alt="">
+                <span class="app-title">${data.data.locales['incoming']} <font>${data.data.locales['court_hearings']}</font></span>
+                <div class="table-header">
+                    <span>${data.data.locales['id']}</span>
+                    <span>${data.data.locales['judge']}</span>
+                    <span>${data.data.locales['prosecutor']}</span>
+                    <span>${data.data.locales['lawyer']}</span>
+                    <span>${data.data.locales['accused']}</span>
+                    <span>${data.data.locales['type']}</span>
+                    <span>${data.data.locales['room']}</span>
+                    <span>${data.data.locales['date']}</span>
+                </div>
+                <div class="table-columns">
+                </div>`;
+                let newData = ``;
+                for (let i in data.data.tv) {
+                    let court = data.data.tv[i];
+                    newData = newData + `
+                    <div class="table-row" style="--i:${parseInt(i)}">
+                        <span>#${court.id}</span>
+                        <span style="font-weight: 700;">
+                            <font>${court.judge}</font>
+                        </span>
+                        <span>${court.prosecutor}</span>
+                        <span>${court.lawyer}</span>
+                        <span style="font-weight: 700;">${court.accused}</span>
+                        <span>${court.type}</span>
+                        <span>${data.data.locales['room']} <font style="font-weight: 700;">${court.room}</font></span>
+                        <span>${court.date}</span>
+                    </div>`
+                }
+                document.querySelector('.table-columns').innerHTML = newData;
+                break;
+        }
+    })
+</script>
+
+</html>

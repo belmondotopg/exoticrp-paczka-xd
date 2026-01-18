@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #player {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+    }
+
+    #worek {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+    }
+
+    #worek img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="player"></div>
+
+  <div id="worek">
+    <img src="https://wallpaperaccess.com/full/3928401.jpg" alt="">
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player = null;
+
+    function getVideoId(song) {
+      return (song == 1) ? "c6JN_BP1PHk" : "78ruW28aHsM";
+    }
+
+    function getStartSeconds(song) {
+      return (song == 1) ? 50 : 1;
+    }
+
+    function ensurePlayer(vid, startSeconds) {
+      if (player) return;
+
+      player = new YT.Player("player", {
+        videoId: vid,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          rel: 0,
+          playsinline: 1,
+          loop: 1,
+          playlist: vid // wymagane, żeby loop działał dla jednego filmu
+        },
+        events: {
+          onReady: function (e) {
+            e.target.seekTo(startSeconds, true);
+            e.target.playVideo();
+          },
+          onStateChange: function (e) {
+            // dodatkowe zabezpieczenie pętli (czasem YT lubi "zakończyć" mimo loop)
+            if (e.data === YT.PlayerState.ENDED) {
+              e.target.playVideo();
+            }
+          }
+        }
+      });
+    }
+
+    function playMusic(song) {
+      const vid = getVideoId(song);
+      const startSeconds = getStartSeconds(song);
+
+      if (!window.YT || !YT.Player) {
+        // API jeszcze się nie załadowało – spróbuj za moment
+        setTimeout(() => playMusic(song), 100);
+        return;
+      }
+
+      ensurePlayer(vid, startSeconds);
+
+      if (player && player.loadVideoById) {
+        player.loadVideoById({ videoId: vid, startSeconds });
+        // dla pewności aktualizujemy playlistę do loop
+        if (player.setLoop) player.setLoop(true);
+      }
+    }
+
+    function stopMusic() {
+      if (player && player.pauseVideo) {
+        player.pauseVideo();
+      }
+    }
+
+    $(function () {
+      window.addEventListener("message", function (event) {
+        const data = event.data || {};
+
+        if (data.type === "playMusic") {
+          playMusic(data.song);
+        } else if (data.type === "stopMusic") {
+          stopMusic();
+        } else if (data.type === "worekShow") {
+          $("#worek").show();
+        } else if (data.type === "worekHide") {
+          $("#worek").hide();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+export const MAX_RPM = 8000;

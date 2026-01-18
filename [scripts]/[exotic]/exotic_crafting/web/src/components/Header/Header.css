@@ -1,0 +1,77 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4vh;
+}
+
+.heading p:first-child {
+    color: white;
+    font-weight: 700;
+    font-size: 1.4vw;
+}
+
+.heading p:last-child {
+    color: #929292;
+    font-size: 0.7vw;
+    width: 24vw;
+    line-height: 2.4vh;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1.4vw;
+}
+
+.informations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.4vh;
+}
+
+.informations p:first-child {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75vw;
+}
+
+.progressbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.progressbar__background {
+    position: relative;
+    width: 12vw;
+    height: 0.5vh;
+    background-color: #2b2929;
+}
+
+.progressbar__progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 70%;
+    background-color: #FFA91D;
+}
+
+.progressbar__xp {
+    margin-top: 0.4vh;
+    color: #BEBEBE;
+    font-weight: 600;
+    font-size: 0.65vw;
+}
+
+.header__avatar {
+    width: 3.5vw;
+    border-radius: 0.5vw;
+}

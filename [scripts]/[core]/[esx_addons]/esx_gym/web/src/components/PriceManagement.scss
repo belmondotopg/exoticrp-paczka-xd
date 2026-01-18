@@ -1,0 +1,204 @@
+.price-management {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.price-management__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.price-management__back,
+.price-management__close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  z-index: 10;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.price-management__title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: white;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.025em;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+
+.price-management__subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+.price-management__info {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.price-management__info-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.price-management__info-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+}
+
+.price-management__form {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.price-management__form-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 22px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.price-management__form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.price-management__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.price-management__form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.price-management__form-input {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-management__form-input:focus {
+  outline: none;
+  border-color: rgba(252, 117, 57, 0.6);
+  box-shadow: 0 0 0 3px rgba(252, 117, 57, 0.2);
+}
+
+.price-management__form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.price-management__form-submit {
+  background: linear-gradient(135deg, #D66033 0%, #46281E 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 32px rgba(252, 117, 57, 0.4);
+  margin-top: 12px;
+}
+
+.price-management__form-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(252, 117, 57, 0.6);
+}
+
+.price-management__form-submit:disabled {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.price-management__form-submit.secondary:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .price-management__form {
+    padding: 24px;
+  }
+  
+  .price-management__form-grid {
+    gap: 20px;
+  }
+}

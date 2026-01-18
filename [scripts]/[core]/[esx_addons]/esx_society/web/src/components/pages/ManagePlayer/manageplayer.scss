@@ -1,0 +1,306 @@
+.kariee_manage{
+    position: relative;
+    height: 100%;
+
+    .kariee_header{
+        padding-right: 13px;
+    }
+
+    .iconsstyle {
+        color: var(--_descriptionText);
+        &:hover{
+            opacity: .8;
+            cursor: pointer;
+            transition: all 250ms;
+        }
+
+        margin-left: 13px;
+        scale: 0.8;
+    }
+
+    .kariee_manage_content{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 95%;
+        gap: 5px;
+        overflow-y: auto;
+        padding-right: 10px;
+        input{
+            background-color: var(--_contentColor);
+            border: unset;
+            color: white;
+            padding: 10px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .kmc_content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5px;
+            
+            .kmc_content_info{
+                flex-grow: 1;
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                font-size: .8rem; 
+                div{
+                    flex-grow: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--_contentColor);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    transition: background-color 0.2s ease;
+                }
+                .small_data{
+                    flex-grow: 0;
+                    width: 7%;
+                }
+
+                .kmc_content_active{
+                    position: relative;
+                    width: 35px;
+                }
+
+                .name_data_content{
+                    max-width: 100%;
+                }
+                
+                .kmc_content_name{
+                    padding: 0px 10px;
+                    box-sizing: border-box;
+                    .kmc_content_name_data{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: flex-end;
+                        gap: 3.5px;
+                        .kmc_c_name_dcid{
+                            width: fit-content;
+                            font-size: .6rem;
+                            color: var(--_descriptionText)
+                        }
+                    }
+                    .kmc_content_name_copy{
+                        color: var(--_descriptionText);
+                        &:hover{
+                            opacity: .8;
+                            cursor: pointer;
+                            transition: all 250ms;
+                        }
+
+                        &:active{
+                            scale: 0.95;
+                        }
+                    }
+                }
+
+                .kmc_content_job{
+                    max-width: 25%;
+                    justify-content: flex-start;
+                    padding: 0px 10px;
+                    box-sizing: border-box;
+                }
+
+            }
+
+            .kmc_content_buttons{
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+            }
+        }
+    }
+}
+
+.btn{
+    width: 135px;
+    font-size: .7rem;
+}
+
+.btn_disabled{
+    background-color: red;
+}
+
+
+.kariee_changebadge{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgb(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    
+
+    .kariee_changerang_content,
+    .kariee_changebadge_content{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        min-height: 20%;
+        background-color: rgb(0, 0, 0, 0.8);
+        padding: 30px 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+
+        .kariee_chb_header{
+            display: flex;
+            flex-direction: column;
+
+            .kariee_chbh_name{
+                color: var(--_descriptionText);
+                text-transform: uppercase;
+                font-weight: 600;
+                margin-bottom: -4px;
+            }
+
+            .kariee_chbh_context{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .kariee_chbh_con{
+                    font-weight: 600;
+                    font-size: 1.2rem;
+                }
+
+                .kariee_chbh_line{
+                    flex-grow: 1;
+                    height: 3px;
+                    background-color: white;
+                }
+
+                .kariee_chbh_btn{
+                    padding: 3px 0px;
+                }
+            }
+        }
+
+        .kariee_chb_content{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            height: 40px;
+
+            input{
+                flex-grow: 1;
+                background-color: var(--_contentColor);
+                border: none;
+                outline: none;
+                color: white;
+                padding: 0px 20px;
+                box-sizing: border-box;
+            }
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+        }
+
+        .kariee_chb_content-btns{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+
+            .kariee_webhook_btn{
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                width: 100%;
+                text-align: center;
+                font-size: .7rem;
+                font-weight: 600;
+
+                div{
+                    padding: 10px;
+                }
+                
+                .btn_name{
+                    width: 80%;
+                    background-color: var(--_contentColor);
+                }
+
+                .btn_choose{
+                    width: calc(20% + 5px);
+                    background-color: var(--_buttonColor);
+                    transition: opacity 0.3s, scale 0.3s;
+
+                    &:hover{
+                        opacity: .8;
+                    }
+
+                    &:active{
+                        scale: 0.95;
+                    }
+                }
+            }
+        }
+    }
+
+    .kariee_chr_header{
+        padding-right: 8px;
+    }
+
+    .kariee_changerang_content{
+        height: 60%;
+    }
+
+    .kariee_chb_content_rang{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        height: 90%;
+        overflow-y: scroll;
+        padding-right: 5px;
+
+        .kariee_chb_c_r_ranga{
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+
+            .kariee_chb_cr_r_description{
+                flex-grow: 1;
+                background-color: var(--_contentColor);
+                display: flex;
+                align-items: center;
+                padding: 10px 20px;
+                box-sizing: border-box;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+*::-webkit-scrollbar {
+    width: 2px;
+
+}
+
+*::-webkit-scrollbar-track {
+    margin-right: 10px;
+    background: var(--_descriptionText);
+    border: 2px solid var(--_descriptionText);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--_importantText);
+    border: 2px solid var(--_importantText);
+}

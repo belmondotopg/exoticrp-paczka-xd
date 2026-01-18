@@ -1,0 +1,196 @@
+{
+    "logo": "logo.png",
+    "logoFilter": "drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.548))",
+    "videoBackground": {
+        "enable": true,
+        "file": "video1.mp4"
+    },
+    "imageBackground": {
+        "enable": false,
+        "images": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+            "6.jpg",
+            "7.jpg"
+        ]
+    },
+    "music": {
+        "hideButPlay": false,
+        "enable": true,
+        "autoplay": true,
+        "loopPlaylist": true,
+        "volume": 0.05,
+        "tracks": [
+            {
+                "title": "Aleshen - Pozdro",
+                "file": "track1.mp3",
+                "image": "track1.jpg"
+            },
+            {
+                "title": "Kronkel Dom - Drogas Bonito",
+                "file": "track2.mp3",
+                "image": "track2.jpg"
+            },
+            {
+                "title": "Kaz Bałagane x Belmondo, ft. Sentino - ŚWIEŻY HAJS",
+                "file": "track3.mp3",
+                "image": "track3.jpg"
+            }
+        ]
+    },
+    "tips": {
+        "enable": true,
+        "list": [
+            "Zawsze pozostawaj w roli — myśl, reaguj i mów tak, jak zrobiłaby to twoja postać.",
+            "Daj innym przestrzeń do odgrywania ról — nie poganiaj scen, pozwól historiom się rozwijać.",
+            "Czyny mówią więcej niż słowa — używaj emotek i opisów, by pokazać działania swojej postaci.",
+            "Nie wymuszaj RP — twórz okazje, a nie gotowe zakończenia.",
+            "Porażki są częścią RP — pozwól swojej postaci czasem przegrać, to buduje lepsze historie.",
+            "Nie psuj immersji — unikaj OOC, chyba że jest to absolutnie konieczne.",
+            "Pamiętaj: twoja postać to nie ty — oddziel emocje gracza od emocji postaci.",
+            "Buduj historię przez relacje — rozmawiaj, wchodź w interakcje, twórz więzi.",
+            "Reaguj znacząco — nawet drobne wydarzenia mogą wpłynąć na rozwój postaci.",
+            "Nie goń za akcją — sceny z życia codziennego często dają najlepsze RP."
+        ]
+    },
+    "links": {
+        "enable": true,
+        "list": [
+            {
+                "icon": "fa-brands fa-discord",
+                "link": "https://discord.gg/exoticrp"
+            },
+            {
+                "icon": "fa-solid fa-globe",
+                "link": "https://exoticrp.pl"
+            },
+            {
+                "icon": "fa-brands fa-tiktok",
+                "link": "https://www.tiktok.com/@exoticrp_pl"
+            }
+        ]
+    },
+    "loadingBar": true,
+    "buttons": true,
+    "faq": {
+        "enable": false,
+        "list": [
+            {
+                "icon": "fa-solid fa-circle-question",
+                "q": "O czym jest serwer?",
+                "a": "Nasz serwer skupia się na immersyjnym roleplayu z autorskimi systemami, realistyczną ekonomią i unikalnymi mechanikami rozgrywki."
+            }
+        ]
+    },
+    "rules": {
+        "enable": false,
+        "list": [
+            {
+                "icon": "fa-solid fa-gun",
+                "name": "RDM",
+                "desc": "Losowe zabijanie bez uzasadnienia fabularnego lub interakcji RP."
+            }
+        ]
+    },
+    "changelog": {
+        "enable": false,
+        "list": [
+            {
+                "name": "Aktualizacja v1.0.4",
+                "desc": "Poprawki stabilności i drobne zmiany w systemach serwera."
+            }
+        ]
+    },
+    "keybinds": {
+        "enable": true,
+        "list": [
+            {
+                "key": "F1",
+                "desc": "Radial Menu"
+            },
+            {
+                "key": "F2",
+                "desc": "Ekwipunek"
+            },
+            {
+                "key": "F3",
+                "desc": "Menu Animacji"
+            },
+            {
+                "key": "F4",
+                "desc": "Zarządzanie nieruchomością"
+            },
+            {
+                "key": "F5",
+                "desc": "Zmiana odległości mówiania"
+            },
+            {
+                "key": "F6",
+                "desc": "Akcje frakcyjne"
+            },
+            {
+                "key": "F9",
+                "desc": "System Faktur i umów"
+            },
+            {
+                "key": "F11",
+                "desc": "Fps Booster"
+            },
+            {
+                "key": "~",
+                "desc": "Podnoszenie rąk"
+            },
+            {
+                "key": "TAB",
+                "desc": "Podgląd Bindów"
+            },
+            {
+                "key": "Y",
+                "desc": "Włączanie/Wyłączanie silnika"
+            },
+            {
+                "key": "U",
+                "desc": "Zamykanie/Otwieranie pojazdu"
+            },
+            {
+                "key": "H",
+                "desc": "Wejście/Wyjście z bagażnika"
+            },
+            {
+                "key": "J",
+                "desc": "Czołganie podczas BW"
+            },
+            {
+                "key": "B",
+                "desc": "Wskazywanie palcem"
+            },
+            {
+                "key": "T",
+                "desc": "Chat"
+            },
+            {
+                "key": "Z",
+                "desc": "Zetka (Lista graczy)"
+            },
+            {
+                "key": "DELETE",
+                "desc": "Tablety frakcyjne"
+            }
+        ]
+    },
+    "translations": {
+        "faq": "Najczęściej zadawane pytania",
+        "nowplay": "Aktualnie odtwarzane",
+        "rules": "Zasady",
+        "faqheader": "FAQ",
+        "changelog": "Lista zmian",
+        "keybinds": "Klawiszologia",
+        "keybinds_header": "Lista skrótów klawiszowych",
+        "keybinds_desc": "Kliknij klawisz na klawiaturze lub w interfejsie, aby sprawdzić jego działanie.",
+        "keybinds_pressed": "Wciśnięty klawisz",
+        "keybinds_noassigned": "Ten klawisz nie ma przypisanej akcji"
+    }
+}

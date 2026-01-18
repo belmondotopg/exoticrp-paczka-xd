@@ -1,0 +1,109 @@
+.kariee_navbar{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px 30px;
+
+    .k_navbar_topper{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        .k_n_t_logo{
+            img{
+                width: 85px;
+            }
+        }
+
+        .k_n_t_text{
+            width: 100%;
+            
+            .k_n_t_t_job{
+                font-size: 1.3rem;
+            }
+
+            .k_n_t_t_description{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .k_n_t_t_d_line{
+                    flex-grow: 1;
+                    height: 2px;
+                    background-color: white;
+                }
+
+                .k_n_t_t_d_logout{
+                    font-size: .7rem;
+                    
+                    &.closing{
+                        pointer-events: none !important;
+                        transform: scale(1) !important;
+                        background-color: var(--_buttonColor) !important;
+                        
+                        &:hover{
+                            background-color: var(--_buttonColor) !important;
+                        }
+                        
+                        &:active{
+                            transform: scale(1) !important;
+                            background-color: var(--_buttonColor) !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+
+    .k_navbar_content{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5%;
+        margin-bottom: -0.5%;
+
+        .k_n_c_content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+
+            .k_n_c_content_info{
+                display: flex;
+                align-items: flex-end;
+                gap: 10px;
+                background-color: var(--_contentColor);
+                flex-grow: 1;
+                padding: 15px 20px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+                transition: all 0.2s ease;
+
+                &:hover{
+                    background-color: var(--_contentColorHover);
+                    box-shadow: var(--_shadowMd);
+                }
+
+                span:first-child{
+                    text-transform: uppercase;
+                }
+
+                span:last-child{
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
+}
+
+.no_access{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-size: 3.0rem;
+    font-weight: 900;
+}

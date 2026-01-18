@@ -1,0 +1,144 @@
+.kariee_financial_reports {
+    position: relative;
+    height: 100%;
+
+    .kariee_header {
+        padding-right: 13px;
+    }
+
+    .financial_reports_content {
+        margin-top: 10px;
+        height: 95%;
+        overflow-y: auto;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .financial_summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+
+            .summary_card {
+                background-color: var(--_contentColor);
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                
+                &:hover{
+                    box-shadow: var(--_shadowMd);
+                    transform: translateY(-2px);
+                }
+
+                &.highlight {
+                    border: 2px solid var(--_buttonColor);
+                }
+
+                .summary_label {
+                    font-size: 0.75rem;
+                    color: var(--_descriptionText);
+
+                    &.positive {
+                        color: #00C49F;
+                    }
+
+                    &.negative {
+                        color: #FF8042;
+                    }
+                }
+
+                .summary_value {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: var(--_importantText);
+
+                    &.positive {
+                        color: #00C49F;
+                    }
+
+                    &.negative {
+                        color: #FF8042;
+                    }
+                }
+            }
+        }
+
+        .financial_charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+
+            .chart_section {
+                background-color: var(--_contentColor);
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+
+                &.full_width {
+                    grid-column: 1 / -1;
+                }
+
+                .chart_header {
+                    margin-bottom: 15px;
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                }
+
+                .chart_container {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 1200px) {
+                grid-template-columns: 1fr;
+
+                .chart_section.full_width {
+                    grid-column: 1;
+                }
+            }
+        }
+
+        .financial_analysis {
+            .analysis_card {
+                background-color: var(--_contentColor);
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+
+                .analysis_header {
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+
+                .analysis_content {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 15px;
+
+                    .analysis_item {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+
+                        .analysis_label {
+                            font-size: 0.75rem;
+                            color: var(--_descriptionText);
+                        }
+
+                        .analysis_value {
+                            font-size: 1rem;
+                            font-weight: bold;
+                            color: var(--_importantText);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

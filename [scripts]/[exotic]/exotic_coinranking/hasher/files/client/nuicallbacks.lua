@@ -1,0 +1,16 @@
+functions.registerCallbacks = function()
+    RegisterNUICallback('exoticrp/menu/notify', function(data, cb)
+        ESX.ShowNotification(data.message, data.type or 'info')
+        cb('OK')
+    end)
+    RegisterNUICallback('exoticrp/menu/close', function(data, cb)
+        SetNuiFocus(false, false)
+        cb('OK')
+    end)
+    RegisterNUICallback('exoticrp/menu/claim', function(data, cb)
+        TriggerServerEvent('vwk/exoticrp/claimProduct', data.productId)
+        cb('OK')
+    end)
+end
+
+CreateThread(functions.registerCallbacks)

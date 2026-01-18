@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.1.1/css/pro.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Piotreq Car Radio</title>
+</head>
+<body>
+    <div class="radio">
+        <div class="top-wrapper">
+            <span id="saved">Zapisane utwory</span>
+            <span id="time">10:20</span>
+        </div>
+        <div class="main-wrapper">
+            <div class="slots-wrapper" id="music-slots">
+                <div class="slot">1</div>
+                <div class="slot">2</div>
+                <div class="slot">3</div>
+                <div class="slot">4</div>
+            </div>
+            <div class="song-wrapper">
+                <span id="playing">Odtwarzasz</span>
+                <span id="song">Nic</span>
+                <span id="timer">Pozostały czas: 00:00:00</span>
+            </div>
+            <div class="slots-wrapper hidden">
+                <div class="slot">1</div>
+                <div class="slot">2</div>
+                <div class="slot">3</div>
+                <div class="slot">4</div>
+            </div>
+        </div>
+        <div class="bottom-wrapper">
+            <div class="radio-input">
+                <input type="text" id="music-url" placeholder="Link do muzyki...">
+                <div>
+                    <div class="radio-btn" onclick="SaveMusic()"><i class="fa-solid fa-floppy-disk"></i></div>
+                    <div class="radio-btn" id="play-btn" onclick="PlayMusic()"><i class="fa-solid fa-play"></i></div>
+                </div>
+            </div>
+            <div class="radio-input">
+                <input type="text" id="music-volume" value="100%" disabled>
+                <div>
+                    <div class="radio-btn" onclick="ChangeVolume('down')"><i class="fa-solid fa-minus"></i></div>
+                    <div class="radio-btn" onclick="ChangeVolume('up')"><i class="fa-solid fa-plus"></i></div>
+                </div>
+            </div>
+            <div class="radio-input" id="loop-btn" onclick="ToggleLoop()">
+                <span>Odtwórz w pętli</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="app.js"></script>
+</html>

@@ -1,0 +1,199 @@
+.kariee_firmmanage{
+    position: relative;
+    height: 100%;
+
+    .kariee_firmmanage_content{
+        margin-top: 10px;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .k-fmc-topper{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .k-fmc_stankonta{
+                width: 100%;
+                padding: 20px 0px;
+                background-color: var(--_contentColor);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+    
+                span:first-child{
+                    color: var(--_descriptionText)
+                }
+    
+                span:last-child{
+                    font-size: 2.0rem;
+                }
+            }
+    
+            .k-fmc_kontobuttons{
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+    
+                div{
+                    flex-grow: 1;
+                    text-align: center;
+                    background-color: var(--_buttonColor);
+                    font-size: .8rem;
+                    padding: 25px 0px;
+                    border-radius: 6px;
+                    box-shadow: var(--_shadowSm);
+                    transition: all 0.25s ease;
+
+                    &:hover{
+                        background-color: #ff8000;
+                        cursor: pointer;
+                        box-shadow: var(--_shadowHover);
+                        transform: translateY(-1px);
+                    }
+
+                    &:active{
+                        transform: translateY(0) scale(0.98);
+                    }
+                }
+            }
+        }
+
+        .k-fmc-bottomer{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .k-fmc-level{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    background-color: var(--_contentColor);
+                    align-items: center;
+                    justify-content: center;
+                    width: 25%;
+                    padding: 10px 0px;
+                    font-weight: 600;
+                    border-radius: 6px;
+                    box-shadow: var(--_shadowSm);
+                    transition: all 0.2s ease;
+
+                    &:hover{
+                        box-shadow: var(--_shadowMd);
+                        transform: translateY(-2px);
+                    }
+
+                    span:first-child{
+                        font-size: .8rem;
+                        color: var(--_descriptionText)
+                    }
+                }
+            }
+
+            .bonusy{
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+
+                .bonus_cont{
+                    flex-grow: 1;
+                    background-color: var(--_contentColor);
+                    padding: 10px;
+                    color: rgb(255, 255, 255, 0.5) !important;
+                    text-align: center;
+                    border-radius: 6px;
+                    box-shadow: var(--_shadowSm);
+                    transition: all 0.2s ease;
+
+                    &:hover{
+                        box-shadow: var(--_shadowMd);
+                        transform: translateY(-2px);
+                    }
+
+                    span{
+                        font-weight: 600;
+                        color: rgb(255, 255, 255, 1);
+                    }
+                }
+            }
+
+            .k-fmc-levelbar{
+                position: relative;
+                width: 100%;
+                height: 50px;
+
+                .k-fmc-levelbar-max{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    background-color: var(--_contentColor);
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 6px;
+                }
+
+                .k-fmc-levelbar-current{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    background-color: var(--_buttonColor);
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 6px;
+                    transition: width 0.3s ease;
+                }
+
+                .k-fmc-levelbar-text{
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-weight: 600;
+                }
+            }
+
+
+            .k-fmc-stats{
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                width: 100%;
+    
+                .k-fmc_stats_data{
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--_contentColor);
+                    padding: 25px 0px;
+                    font-weight: 600;
+                    border-radius: 6px;
+                    box-shadow: var(--_shadowSm);
+                    transition: all 0.2s ease;
+
+                    &:hover{
+                        box-shadow: var(--_shadowMd);
+                        transform: translateY(-2px);
+                    }
+    
+                    span:first-child{
+                        font-size: .8rem;
+                        color: var(--_descriptionText)
+                    }
+                }
+            }
+        }
+
+    }
+}

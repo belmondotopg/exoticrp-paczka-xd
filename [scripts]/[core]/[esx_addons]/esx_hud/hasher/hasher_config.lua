@@ -1,0 +1,21 @@
+{
+    "files": [
+        "client/bodycam.lua",
+        "client/crosshair.lua",
+        "client/hud.lua",
+        "client/id.lua",
+        "client/notification.lua",
+        "client/npcTalk.lua",
+        "client/progress.lua",
+        "client/radio.lua",
+        "client/scoreboard.lua",
+        "client/radar.lua",
+        "client/npcDialogs.lua",
+        "client/multicharacter.lua",
+        "client/settings.lua",
+        "client/jobcenter.lua",
+        "client/documents.lua",
+        "client/tasks.lua",
+        "client/statistics.lua"
+    ]
+}

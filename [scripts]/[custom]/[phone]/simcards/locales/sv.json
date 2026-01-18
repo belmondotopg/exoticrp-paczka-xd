@@ -1,0 +1,33 @@
+{
+    "CLIENT": {
+        "NOTIFICATIONS": {
+            "NUMBER_CHANGED": {
+                "TITLE": "Sim kort ändrat",
+                "DESCRIPTION": "Ditt nya telefonnummer är {number}"
+            }
+        },
+        "DEBUG": {
+            "SETTING_NUMBER_FAILED": "Misslyckades med att sätta ett nytt nummer !"
+        }
+    },
+    "SERVER": {
+        "NOTIFICATIONS": {
+            "ERROR": {
+                "TITLE": "Fel",
+                "MISSING_IDENTIFIER": "Spelaridentifieringsfel!",
+                "NO_ACTIVE_NUMBER": "Du har inte ett aktivt telefonnummer!",
+                "GENERATE_NUMBER_FAILED": "Misslyckades med att generera nummer!",
+                "UPDATE_DATABASE_FAILED": "Misslyckades med att uppdatera nummer i databasen.",
+                "CHANGE_SIM_FAILED": "Misslyckades med att ändra SIM-kort."
+            },
+            "SUCCESS": {
+                "TITLE": "Framgång",
+                "SIM_CHANGED": "SIM-kort ändrat.",
+                "SIM_REMOVED": "SIM-kort borttaget från telefon."
+            }
+        },
+        "DEBUG": {
+            "GIVESIM": "Her Sim kort med nummer:"
+        }
+    }
+}

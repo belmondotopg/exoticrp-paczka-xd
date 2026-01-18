@@ -1,0 +1,999 @@
+/* ===============================================
+   INVENTORY MANAGEMENT - COMPLETELY REWRITTEN FROM SCRATCH
+   =============================================== */
+
+@use '../App.scss' as *;
+
+.inventory-management {
+  @extend %component-base;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.inventory-management__container {
+  @extend %container-base;
+}
+
+/* ===============================================
+   HEADER STYLES
+   =============================================== */
+
+.inventory-management__header {
+  @extend %header-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 16px 0;
+}
+
+.inventory-management__back,
+.inventory-management__close {
+  @extend %button-base;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.inventory-management__back {
+  left: 16px;
+}
+
+.inventory-management__close {
+  right: 16px;
+}
+
+.inventory-management__title {
+  @extend %title-base;
+  text-align: center;
+  margin: 0;
+}
+
+/* ===============================================
+   CONTENT STYLES
+   =============================================== */
+
+.inventory-management__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inventory-management__info {
+  @extend %card-base;
+  text-align: center;
+}
+
+.inventory-management__description {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+/* ===============================================
+   DELIVERY SYSTEM STYLES
+   =============================================== */
+
+.inventory-management__delivery {
+  @extend %card-base;
+  margin-bottom: 20px;
+}
+
+.inventory-management__delivery-header {
+  margin-bottom: 16px;
+}
+
+.inventory-management__delivery-title {
+  @extend %section-title;
+}
+
+.inventory-management__delivery-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inventory-management__delivery-item {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 6px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.inventory-management__delivery-item:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.inventory-management__delivery-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.inventory-management__delivery-item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.inventory-management__delivery-item-info {
+  flex: 1;
+}
+
+.inventory-management__delivery-item-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2px;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-description {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.inventory-management__delivery-item-price-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-price-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #10b981;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.inventory-management__delivery-item-quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inventory-management__delivery-item-quantity-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inventory-management__delivery-item-quantity-btn {
+  width: 42px !important;
+  height: 42px !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+
+.inventory-management__delivery-item-quantity-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7) !important;
+  transform: scale(1.05) !important;
+}
+
+.inventory-management__delivery-item-quantity-btn:active {
+  transform: scale(0.95) !important;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.inventory-management__delivery-item-quantity-btn:disabled {
+  background: rgba(107, 114, 128, 0.6) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.inventory-management__delivery-item-quantity-input {
+  width: 70px !important;
+  height: 42px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  
+  /* Dodatkowe style dla lepszego wyśrodkowania */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+.inventory-management__delivery-item-quantity-input:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: scale(1.02) !important;
+  animation: pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: transform !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+}
+
+.inventory-management__delivery-item-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.inventory-management__delivery-item-total-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-total-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fbbf24;
+  font-family: 'Inter', sans-serif;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+.inventory-management__delivery-item-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.inventory-management__delivery-item-price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inventory-management__delivery-item-price-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-price-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fbbf24;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inventory-management__delivery-item-input-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-item-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  width: 80px !important;
+  text-align: center !important;
+  font-size: 0.85rem !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all 0.3s ease !important;
+  
+  &:focus {
+    outline: none !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+.inventory-management__custom-buy {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.inventory-management__custom-buy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inventory-management__custom-buy-title {
+  margin: 0;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__custom-buy-description {
+  margin: 5px 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__custom-buy-total {
+  text-align: right;
+}
+
+.inventory-management__custom-buy-total-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #10b981;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__custom-buy-total-count {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-summary {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 24px !important;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  margin-top: 16px !important;
+  flex-wrap: nowrap !important;
+}
+
+.inventory-management__delivery-total {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  flex-shrink: 0 !important;
+}
+
+.inventory-management__delivery-total-label {
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.inventory-management__delivery-total-value {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: #fbbf24 !important;
+  font-family: 'Inter', sans-serif !important;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3) !important;
+}
+
+.inventory-management__delivery-order-btn {
+  @extend %button-base;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  min-width: 220px !important;
+  width: auto !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+}
+
+.inventory-management__delivery-order-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 10px 35px rgba(16, 185, 129, 0.6) !important;
+  transform: scale(1.02) !important;
+}
+
+.inventory-management__delivery-order-btn:active:not(:disabled) {
+  transform: scale(0.98) !important;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.inventory-management__delivery-order-btn:disabled {
+  background: rgba(107, 114, 128, 0.6) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.inventory-management__delivery-order-btn--loading {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+  will-change: transform !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.inventory-management__delivery-order-btn--loading::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 50% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+  will-change: transform !important;
+  transform: translateZ(0) !important;
+}
+
+/* ===============================================
+   INVENTORY VIEW STYLES
+   =============================================== */
+
+.inventory-management__inventory {
+  @extend %card-base;
+  margin-bottom: 20px;
+}
+
+.inventory-management__inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.inventory-management__inventory-title {
+  @extend %section-title;
+}
+
+.inventory-management__inventory-summary {
+  display: flex;
+  align-items: center;
+}
+
+.inventory-management__inventory-total {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.inventory-management__item {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.inventory-management__item:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+  border-color: rgba(252, 117, 57, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+.inventory-management__item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.inventory-management__item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.inventory-management__item-icon svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.inventory-management__item:hover .inventory-management__item-icon {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.inventory-management__item-info {
+  flex: 1;
+}
+
+.inventory-management__item-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2px;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__item-description {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inventory-management__item-stock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inventory-management__item-stock-label {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inventory-management__item-stock-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__item-stock-value--high {
+  color: #10b981;
+}
+
+.inventory-management__item-stock-value--medium {
+  color: #fbbf24;
+}
+
+.inventory-management__item-stock-value--low {
+  color: #ef4444;
+}
+
+.inventory-management__item-status {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inventory-management__item-status--high {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.inventory-management__item-status--medium {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.inventory-management__item-status--low {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.inventory-management__item-progress {
+  margin-top: 10px;
+}
+
+.inventory-management__item-progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+
+.inventory-management__item-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, #10b981, #34d399, #10b981);
+  background-size: 200% 100%;
+  animation: shimmer-bg 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: background-position;
+}
+
+.inventory-management__item-progress-text {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+/* ===============================================
+   ACTIONS SECTION
+   =============================================== */
+
+.inventory-management__actions {
+  @extend %card-base;
+  margin-top: 16px;
+}
+
+.inventory-management__action-info {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.inventory-management__action-title {
+  @extend %section-title;
+}
+
+.inventory-management__action-description {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.inventory-management__delivery-btn {
+  @extend %button-base;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  min-width: 180px !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.inventory-management__delivery-btn:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
+  box-shadow: 0 8px 30px rgba(217, 119, 6, 0.6) !important;
+  transform: scale(1.02) !important;
+}
+
+.inventory-management__delivery-btn:active {
+  transform: scale(0.98) !important;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ===============================================
+   RESPONSIVE DESIGN
+   =============================================== */
+
+@media (max-width: 768px) {
+  .inventory-management__header {
+    padding: 12px 0;
+  }
+  
+  .inventory-management__back,
+  .inventory-management__close {
+    left: 12px;
+    right: 12px;
+  }
+  
+  .inventory-management__title {
+    font-size: 1.2rem;
+  }
+  
+  .inventory-management__items {
+    grid-template-columns: 1fr;
+  }
+  
+  .inventory-management__delivery-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .inventory-management__delivery-item-price {
+    align-items: flex-start;
+  }
+  
+  .inventory-management__delivery-item-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .inventory-management__delivery-summary {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .inventory-management__delivery-order-btn {
+    width: 100%;
+  }
+  
+  .inventory-management__delivery-item-quantity-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+  }
+  
+  .inventory-management__delivery-item-quantity-input {
+    width: 50px !important;
+    height: 32px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* ===============================================
+   DELIVERY ACTIONS STYLES
+   =============================================== */
+
+.inventory-management__delivery-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.inventory-management__delivery-action {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.inventory-management__delivery-action-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inventory-management__delivery-action-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  svg {
+    color: #fbbf24;
+    font-size: 0.8rem;
+  }
+}
+
+.inventory-management__delivery-action-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.inventory-management__delivery-action-cost {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.inventory-management__delivery-action-cost-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+}
+
+.inventory-management__delivery-action-cost-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fbbf24;
+  font-family: 'Inter', sans-serif;
+  
+  &.delivery-discount {
+    color: #10b981;
+  }
+}
+
+.inventory-management__delivery-action-cost-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+}
+
+.inventory-management__delivery-action-btn {
+  @extend %button-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  min-width: 180px;
+
+  &--buy {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1f2937;
+    border: 1px solid #f59e0b;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    }
+  }
+
+  &--delivery {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 1px solid #059669;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+  }
+
+  &--loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  svg {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile responsiveness for delivery actions */
+@media (max-width: 768px) {
+  .inventory-management__delivery-actions {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .inventory-management__delivery-action {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .inventory-management__delivery-action-title {
+    font-size: 0.8rem;
+  }
+
+  .inventory-management__delivery-action-description {
+    font-size: 0.7rem;
+  }
+
+  .inventory-management__delivery-action-btn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    min-height: 40px;
+    min-width: 160px;
+  }
+}

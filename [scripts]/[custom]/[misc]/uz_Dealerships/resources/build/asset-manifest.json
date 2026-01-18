@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/resources/build/static/css/main.20ac9df6.css",
+    "main.js": "/resources/build/static/js/main.eaa4d46f.js",
+    "static/media/1.svg": "/resources/build/static/media/1.f5cd9f32ff7039580a45.svg",
+    "static/media/Inter_24pt-SemiBold.ttf": "/resources/build/static/media/Inter_24pt-SemiBold.8e921d98d20d6ae79fff.ttf",
+    "static/media/Inter_24pt-Light.ttf": "/resources/build/static/media/Inter_24pt-Light.087551d9b161e691a2b4.ttf",
+    "static/media/Inter_18pt-Medium.ttf": "/resources/build/static/media/Inter_18pt-Medium.c51b145d8cf66a74cc74.ttf",
+    "static/media/Inter_28pt-Medium.ttf": "/resources/build/static/media/Inter_28pt-Medium.9338c7d720b363eea8cb.ttf",
+    "static/media/Inter_18pt-Regular.ttf": "/resources/build/static/media/Inter_18pt-Regular.86c330c66f7333ff6202.ttf",
+    "static/media/front-effect.webp": "/resources/build/static/media/front-effect.ce238f8ce05bc0ef978e.webp",
+    "static/media/close-btn.svg": "/resources/build/static/media/close-btn.b2c4ab21d41752f86ec1.svg",
+    "index.html": "/resources/build/index.html",
+    "main.20ac9df6.css.map": "/resources/build/static/css/main.20ac9df6.css.map",
+    "main.eaa4d46f.js.map": "/resources/build/static/js/main.eaa4d46f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.20ac9df6.css",
+    "static/js/main.eaa4d46f.js"
+  ]
+}

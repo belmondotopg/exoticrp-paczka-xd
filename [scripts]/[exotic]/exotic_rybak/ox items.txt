@@ -1,0 +1,161 @@
+	--ryby
+	["losos"] = { 
+		label = "Łosoś", 
+		weight = 0,
+		client = { image = 'losos.png' },
+	},
+	["halibut"] = { 
+		label = "Halibut", 
+		weight = 0,
+		client = { image = 'halibut.png' },
+	},
+	["tunczyk"] = { 
+		label = "Tuńczyk", 
+		weight = 0,
+		client = { image = 'tunczyk.png' },
+	},
+	["makrela"] = { 
+		label = "Makrela", 
+		weight = 0,
+		client = { image = 'makrela.png' },
+	},
+	["barwena"] = { 
+		label = "Barwena", 
+		weight = 0,
+		client = { image = 'barwena.png' },
+	},
+	["pstrag"] = { 
+		label = "Pstrąg", 
+		weight = 0,
+		client = { image = 'pstrag.png' },
+	},
+	["dorsz"] = { 
+		label = "Dorsz", 
+		weight = 0,
+		client = { image = 'dorsz.png' },
+	},
+	["karmazyn"] = { 
+		label = "Karmazyn", 
+		weight = 0,
+		client = { image = 'karmazyn.png' },
+	},
+	["miecznik"] = { 
+		label = "Miecznik", 
+		weight = 0,
+		client = { image = 'miecznik.png' },
+	},
+	["rekin"] = { 
+		label = "Mały Rekin", 
+		weight = 0,
+		client = { image = 'rekin.png' },
+	},
+	["sandacz"] = { 
+		label = "Sandacz", 
+		weight = 0,
+		client = { image = 'sandacz.png' },
+	},
+	["fladra"] = { 
+		label = "Flądra", 
+		weight = 0,
+		client = { image = 'fladra.png' },
+	},
+	["okon"] = { 
+		label = "Okoń morski", 
+		weight = 0,
+		client = { image = 'okon.png' },
+	},
+
+	['rod_oak'] = {
+		label   = 'Wędka dębowa',
+		stack   = false,
+		weight  = 500,
+		consume = 0,
+		metadata = {
+			level  = 'Poziom',
+			xp     = 'XP',
+			nextxp = 'Do następnego',
+			type   = 'Rodzaj'
+		},
+		client = { image = 'debowa.png' },
+		server = { init = function(m) m.level=m.level or 1; m.xp=m.xp or 0; m.nextxp=m.nextxp or 100; m.type=1; return m end }
+	},
+	['rod_bamboo'] = {
+		label = 'Wędka bambusowa', stack=false, weight=500, consume=0,
+		metadata={level='Poziom',xp='XP',nextxp='Do następnego',type='Rodzaj'},
+		client={image='bambusowa.png'},
+		server={init=function(m) m.level=m.level or 1; m.xp=m.xp or 0; m.nextxp=m.nextxp or 100; m.type=2; return m end}
+	},
+	['rod_carbon'] = {
+		label = 'Wędka karbonowa', stack=false, weight=500, consume=0,
+		metadata={level='Poziom',xp='XP',nextxp='Do następnego',type='Rodzaj'},
+		client={image='karbonowa.png'},
+		server={init=function(m) m.level=m.level or 1; m.xp=m.xp or 0; m.nextxp=m.nextxp or 100; m.type=3; return m end}
+	},
+	['rod_titan'] = {
+		label = 'Wędka tytanowa', stack=false, weight=500, consume=0,
+		metadata={level='Poziom',xp='XP',nextxp='Do następnego',type='Rodzaj'},
+		client={image='tytanowa.png'},
+		server={init=function(m) m.level=m.level or 1; m.xp=m.xp or 0; m.nextxp=m.nextxp or 100; m.type=4; return m end}
+	},
+	['rod_mythic'] = {
+		label = 'Wędka mityczna', stack=false, weight=500, consume=0,
+		metadata={level='Poziom',xp='XP',nextxp='Do następnego',type='Rodzaj'},
+		client={image='mityczna.png'},
+		server={init=function(m) m.level=m.level or 1; m.xp=m.xp or 0; m.nextxp=0; m.type=5; return m end}
+	},
+
+	['clam'] = {
+		label = 'Małża',
+		weight = 0,
+		stack = true,
+		close = true,
+		description = 'Świeżo złowiona małża. Może zawierać perłę.',
+		client = {
+			image = 'clam.png',
+			usetime = 2500,
+			export = 'exotic_rybak.openClam'
+		}
+	},
+
+	['white_pearl'] = {
+		label = 'Biała Perła',
+		weight = 0,
+		stack = true,
+		description = 'Pospolita biała perła znaleziona w małży.',
+		client = {
+			image = 'white_pearl.png'
+		}
+	},
+
+	['red_pearl'] = {
+		label = 'Czerwona Perła',
+		weight = 0,
+		stack = true,
+		description = 'Rzadka czerwona perła znaleziona w małży.',
+		client = {
+			image = 'red_pearl.png'
+		}
+	},
+
+	['blue_pearl'] = {
+		label = 'Niebieska Perła',
+		weight = 0,
+		stack = true,
+		description = 'Bardzo rzadka niebieska perła znaleziona w małży.',
+		client = {
+			image = 'blue_pearl.png'
+		}
+	},
+
+	['fishing_case'] = {
+	label = 'Skrzynka Rybaka',
+	weight = 500,
+	stack = true,
+	close = true,
+	description = 'Tajemnicza skrzynka wyłowiona z morza. Kto wie co może się w niej znajdować?',
+	client = {
+		image = 'rybak_chest.png',
+		usetime = 1000,
+		export = 'exotic_rybak.openCase'
+	}
+},

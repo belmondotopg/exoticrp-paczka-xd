@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --color-default: #ffffff;
+  --color-hover: #ffffff;
+}
+
+body {
+  visibility: hidden;
+  user-select: none;
+  white-space: nowrap;
+  margin: 0;
+  user-select: none;
+  overflow: hidden;
+}
+
+p {
+  margin: 0;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 40;
+}
+
+#eye {
+  position: absolute;
+  font-size: 5;
+  top: 50.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: #ff8800;
+
+}
+
+.eye-hover {
+  fill: #ff8800;
+}
+
+#hex::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  content: "\2B22";
+  color: #ff8800be;
+  font-size: 5.07vh;
+  text-shadow: #ffffff00 1px 0 10px;
+  -webkit-text-stroke: 1px #ff8800
+}
+
+#options-wrapper {
+  position: absolute;
+  top: calc(48.4%);
+  left: calc(50% + 20pt);
+}
+
+.option-container {
+  color: var(--color-default);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: #00000072;
+  border-radius: 4px;
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 50pt;
+  font-family: 'Commissioner', sans-serif;
+  vertical-align: middle;
+  transition: 200ms;
+  transform-origin: left top;
+  scale: 1;
+  height: 26pt;
+  width: 200pt;
+  margin: 3pt;
+  margin-top: 3;
+}
+
+.option-container:hover {
+  background:#ff8800be;
+  border-radius: 5px;
+  transform-origin: left top;
+  box-shadow: 0px 0px 15px 3px #ff880080;
+  color: var(--color-default);
+  margin-left: 4pt;
+}
+
+.option-icon {
+  line-height: 22pt;
+  width: 14pt;
+  margin: 7pt;
+  padding-left: 3px;
+  padding-right: 3.5px;
+  color: #ff8800;
+}
+
+.option-container:hover .option-icon {
+  color: #ffffff;
+}
+
+.option-label {
+  font-weight: 500;
+  pointer-events: none;
+}

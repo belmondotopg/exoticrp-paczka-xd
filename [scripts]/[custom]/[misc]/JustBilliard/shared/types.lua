@@ -1,0 +1,3 @@
+-- Point types
+TYPE_CUE_STAND = 1
+TYPE_POOL_TABLE = 2

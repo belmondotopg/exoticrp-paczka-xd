@@ -1,0 +1,210 @@
+.kariee_statistics {
+    position: relative;
+    height: 100%;
+
+    .kariee_header {
+        padding-right: 13px;
+    }
+
+    .statistics_content {
+        margin-top: 10px;
+        height: 95%;
+        overflow-y: auto;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .statistics_summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+
+            .summary_card {
+                background-color: var(--_contentColor);
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                
+                &:hover{
+                    box-shadow: var(--_shadowMd);
+                    transform: translateY(-2px);
+                }
+
+                .summary_label {
+                    font-size: 0.75rem;
+                    color: var(--_descriptionText);
+                }
+
+                .summary_value {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: var(--_importantText);
+                }
+            }
+        }
+
+        .statistics_charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+
+            .chart_section {
+                background-color: var(--_contentColor);
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: var(--_shadowSm);
+
+                .chart_header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 15px;
+                    font-size: 0.9rem;
+                    font-weight: bold;
+
+                    .chart_type_selector {
+                        display: flex;
+                        gap: 5px;
+
+                        button {
+                            background-color: rgba(255, 255, 255, 0.1);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            color: white;
+                            padding: 5px 10px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 0.7rem;
+                            transition: all 0.2s;
+
+                            &:hover {
+                                background-color: rgba(255, 255, 255, 0.2);
+                            }
+
+                            &.active {
+                                background-color: var(--_buttonColor);
+                                border-color: var(--_buttonColor);
+                            }
+                        }
+                    }
+                }
+
+                .chart_container {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 1200px) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .statistics_ranking {
+            background-color: var(--_contentColor);
+            padding: 15px;
+            border-radius: 4px;
+
+            .ranking_header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                font-size: 0.9rem;
+                font-weight: bold;
+
+                .ranking_sort {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.8rem;
+
+                    select {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                        outline: none;
+                        cursor: pointer;
+
+                        option {
+                            background-color: var(--_contentColor);
+                            color: white;
+                        }
+                    }
+                }
+            }
+
+            .ranking_list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .ranking_item {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 10px;
+                    background-color: rgba(255, 255, 255, 0.05);
+                    border-radius: 4px;
+                    transition: background-color 0.2s;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                    }
+
+                    .ranking_position {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        color: var(--_buttonColor);
+                        min-width: 40px;
+                        text-align: center;
+                    }
+
+                    .ranking_info {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+
+                        .ranking_name {
+                            font-weight: bold;
+                            font-size: 0.9rem;
+                        }
+
+                        .ranking_grade {
+                            font-size: 0.75rem;
+                            color: var(--_descriptionText);
+                        }
+                    }
+
+                    .ranking_stats {
+                        display: flex;
+                        gap: 20px;
+
+                        .ranking_stat {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            gap: 3px;
+
+                            .stat_label {
+                                font-size: 0.7rem;
+                                color: var(--_descriptionText);
+                            }
+
+                            .stat_value {
+                                font-size: 0.85rem;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

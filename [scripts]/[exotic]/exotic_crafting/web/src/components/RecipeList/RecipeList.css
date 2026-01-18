@@ -1,0 +1,41 @@
+
+.recipeList {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.recipeList p {
+    color: #BFBFBF;
+    font-size: 0.65vw;
+    font-weight: 600;
+}
+
+.recipes {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6vh;
+    padding-right: 0.5vw;
+}
+
+.recipes::-webkit-scrollbar {
+    width: 0.2vw;
+}
+
+.recipes::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 99vw;
+}
+
+.recipes::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff8800, #ff5500);
+    border-radius: 99vw;
+}
+
+.recipes::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ffaa33, #ff7733);
+}

@@ -1,0 +1,39 @@
+.craftItem {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    height: 5vw;
+    border: 0.1vw solid;
+    border-radius: 0.2vw;
+}
+
+.craftItem__quantity {
+    position: absolute;
+    bottom: 0.3vw;
+    right: 0.3vw;
+    color: white;
+    font-size: 0.65vw;
+    font-weight: 600;
+}
+
+.tooltip {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    left: 50%;
+    bottom: -3vh;
+    font-size: 0.6vw;
+    color: gray;
+}
+
+.craftItem.enough {
+    border-color: rgb(54, 126, 45);
+    background: linear-gradient(to top, rgba(149, 255, 0, 0.1) 0%, rgba(149, 255, 0, 0.02) 100%);
+}
+
+.craftItem.notenough {
+    border-color: #FF7E7E;
+    background: linear-gradient(to top, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.02) 100%);
+}

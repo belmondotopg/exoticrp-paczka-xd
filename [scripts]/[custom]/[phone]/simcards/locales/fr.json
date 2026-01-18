@@ -1,0 +1,33 @@
+{
+    "CLIENT": {
+        "NOTIFICATIONS": {
+            "NUMBER_CHANGED": {
+                "TITLE": "Carte SIM Changé",
+                "DESCRIPTION": "Votre nouveau numéro de téléphone est {number}"
+            }
+        },
+        "DEBUG": {
+            "SETTING_NUMBER_FAILED": "L'établissement du nouveau numéro a échoué !"
+        }
+    },
+    "SERVER": {
+        "NOTIFICATIONS": {
+            "ERROR": {
+                "TITLE": "Erreur",
+                "MISSING_IDENTIFIER": "Erreur d'identification du joueur !",
+                "NO_ACTIVE_NUMBER": "Vous n'avez pas de numéro de téléphone actif !",
+                "GENERATE_NUMBER_FAILED": "Échec de la génération du numéro !",
+                "UPDATE_DATABASE_FAILED": "Échec de la mise à jour du numéro dans la base de données.",
+                "CHANGE_SIM_FAILED": "Échec du changement de la carte SIM."
+            },
+            "SUCCESS": {
+                "TITLE": "Succès",
+                "SIM_CHANGED": "Carte SIM changée.",
+                "SIM_REMOVED": "Carte SIM retirée du téléphone."
+            }
+        },
+        "DEBUG": {
+            "GIVESIM": "Une carte SIM a été donné avec le numéro suivant:"
+        }
+    }
+}

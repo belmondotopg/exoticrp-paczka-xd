@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&display=swap');
+
+@import "tailwindcss";
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 4%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 4%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 4%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 9%);
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 9%);
+  --destructive: hsl(357, 100%, 45%);
+  --destructive-foreground: hsl(357 100% 45%);
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 90%);
+  --ring: hsl(0, 0%, 63%);
+  --chart-1: hsl(18, 100%, 48%);
+  --chart-2: hsl(175, 100%, 29%);
+  --chart-3: hsl(196, 72%, 23%);
+  --chart-4: hsl(44, 100%, 50%);
+  --chart-5: hsl(36, 100%, 50%);
+  --sidebar: hsl(0, 0%, 98%);
+  --sidebar-foreground: hsl(0, 0%, 4%);
+  --sidebar-primary: hsl(0, 0%, 9%);
+  --sidebar-primary-foreground: hsl(0, 0%, 98%);
+  --sidebar-accent: hsl(0, 0%, 96%);
+  --sidebar-accent-foreground: hsl(0, 0%, 9%);
+  --sidebar-border: hsl(0, 0%, 90%);
+  --sidebar-ring: hsl(0, 0%, 63%);
+
+  --radius: 0.625rem;
+
+  --c: hsl(0 0% 100%);
+  --primary-hsl: 32 100% 50%;
+  --primary: hsl(var(--primary-hsl));
+  --primary-darker: hsl(32 100% 35%);
+}
+
+.dark {
+  --background: hsl(0, 0%, 4%);
+  --foreground: hsl(0, 0%, 98%);
+  --card: hsl(0, 0%, 9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --popover: hsl(0, 0%, 9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 15%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(0, 0%, 63%);
+  --accent: hsl(0, 0%, 15%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  /* --destructive: hsl(359, 100%, 70%);
+  --destructive-foreground: hsl(357 96% 58%); */
+  --border: hsla(0, 0%, 100%, 0.1);
+  --input: hsla(0, 0%, 100%, 0.15);
+  --ring: hsl(0, 0%, 45%);
+  --chart-1: hsl(225, 84%, 49%);
+  --chart-2: hsl(160, 100%, 37%);
+  --chart-3: hsl(36, 100%, 50%);
+  --chart-4: hsl(273, 100%, 64%);
+  --chart-5: hsl(345, 100%, 56%);
+  --sidebar: hsl(0, 0%, 9%);
+  --sidebar-foreground: hsl(0, 0%, 98%);
+  --sidebar-primary: hsl(225, 84%, 49%);
+  --sidebar-primary-foreground: hsl(0, 0%, 98%);
+  --sidebar-accent: hsl(0, 0%, 15%);
+  --sidebar-accent-foreground: hsl(0, 0%, 98%);
+  --sidebar-border: hsla(0, 0%, 100%, 0.1);
+  --sidebar-ring: hsl(0, 0%, 45%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  /* --color-primary: var(--primary); */
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-c: var(--c);
+  --color-primary: var(--primary);
+  --color-primary-darker: var(--primary-darker);
+  --color-accent: var(--accent-color);
+
+  /* TailwindCSS Colors */
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-slate-50: hsl(210, 33%, 98%);
+  --color-slate-100: hsl(210, 20%, 96%);
+  --color-slate-200: hsl(210, 19%, 94%);
+  --color-slate-300: hsl(210, 14%, 84%);
+  --color-slate-400: hsl(210, 13%, 72%);
+  --color-slate-500: hsl(210, 14%, 54%);
+  --color-slate-600: hsl(210, 19%, 36%);
+  --color-slate-700: hsl(210, 25%, 28%);
+  --color-slate-800: hsl(210, 38%, 15%);
+  --color-slate-900: hsl(210, 48%, 8%);
+  --color-slate-950: hsl(210, 57%, 3%);
+  --color-gray-50: hsl(210, 11%, 98%);
+  --color-gray-100: hsl(210, 6%, 96%);
+  --color-gray-200: hsl(210, 4%, 91%);
+  --color-gray-300: hsl(210, 3%, 85%);
+  --color-gray-400: hsl(210, 4%, 62%);
+  --color-gray-500: hsl(210, 4%, 47%);
+  --color-gray-600: hsl(210, 6%, 39%);
+  --color-gray-700: hsl(210, 11%, 31%);
+  --color-gray-800: hsl(210, 13%, 21%);
+  --color-gray-900: hsl(210, 13%, 13%);
+  --color-gray-950: hsl(210, 19%, 3%);
+  --color-zinc-50: hsl(210, 6%, 98%);
+  --color-zinc-100: hsl(210, 4%, 96%);
+  --color-zinc-200: hsl(210, 3%, 91%);
+  --color-zinc-300: hsl(210, 2%, 85%);
+  --color-zinc-400: hsl(210, 4%, 66%);
+  --color-zinc-500: hsl(210, 4%, 47%);
+  --color-zinc-600: hsl(210, 4%, 35%);
+  --color-zinc-700: hsl(210, 4%, 27%);
+  --color-zinc-800: hsl(210, 5%, 17%);
+  --color-zinc-900: hsl(210, 5%, 11%);
+  --color-zinc-950: hsl(210, 6%, 4%);
+  --color-neutral-50: hsl(0, 0%, 98%);
+  --color-neutral-100: hsl(0, 0%, 96%);
+  --color-neutral-200: hsl(0, 0%, 90%);
+  --color-neutral-300: hsl(0, 0%, 84%);
+  --color-neutral-400: hsl(0, 0%, 64%);
+  --color-neutral-500: hsl(0, 0%, 45%);
+  --color-neutral-600: hsl(0, 0%, 33%);
+  --color-neutral-700: hsl(0, 0%, 25%);
+  --color-neutral-800: hsl(0, 0%, 15%);
+  --color-neutral-900: hsl(0, 0%, 9%);
+  --color-neutral-950: hsl(0, 0%, 4%);
+  --color-stone-50: hsl(30, 14%, 98%);
+  --color-stone-100: hsl(30, 10%, 97%);
+  --color-stone-200: hsl(30, 9%, 91%);
+  --color-stone-300: hsl(30, 8%, 84%);
+  --color-stone-400: hsl(30, 8%, 64%);
+  --color-stone-500: hsl(30, 10%, 47%);
+  --color-stone-600: hsl(30, 13%, 35%);
+  --color-stone-700: hsl(30, 16%, 27%);
+  --color-stone-800: hsl(30, 22%, 17%);
+  --color-stone-900: hsl(30, 25%, 10%);
+  --color-stone-950: hsl(30, 32%, 4%);
+  --color-red-50: hsl(0, 100%, 98%);
+  --color-red-100: hsl(0, 100%, 94%);
+  --color-red-200: hsl(0, 100%, 84%);
+  --color-red-300: hsl(0, 100%, 72%);
+  --color-red-400: hsl(0, 100%, 63%);
+  --color-red-500: hsl(0, 100%, 49%);
+  --color-red-600: hsl(0, 100%, 43%);
+  --color-red-700: hsl(0, 100%, 37%);
+  --color-red-800: hsl(0, 100%, 32%);
+  --color-red-900: hsl(0, 100%, 30%);
+  --color-red-950: hsl(0, 100%, 18%);
+  --color-orange-50: hsl(36, 100%, 97%);
+  --color-orange-100: hsl(36, 100%, 93%);
+  --color-orange-200: hsl(36, 100%, 80%);
+  --color-orange-300: hsl(36, 100%, 70%);
+  --color-orange-400: hsl(36, 100%, 62%);
+  --color-orange-500: hsl(36, 100%, 56%);
+  --color-orange-600: hsl(36, 100%, 50%);
+  --color-orange-700: hsl(36, 100%, 43%);
+  --color-orange-800: hsl(36, 100%, 36%);
+  --color-orange-900: hsl(36, 100%, 31%);
+  --color-orange-950: hsl(36, 100%, 20%);
+  --color-amber-50: hsl(45, 100%, 95%);
+  --color-amber-100: hsl(45, 100%, 90%);
+  --color-amber-200: hsl(45, 100%, 75%);
+  --color-amber-300: hsl(45, 100%, 66%);
+  --color-amber-400: hsl(45, 100%, 57%);
+  --color-amber-500: hsl(45, 100%, 49%);
+  --color-amber-600: hsl(45, 100%, 43%);
+  --color-amber-700: hsl(45, 100%, 37%);
+  --color-amber-800: hsl(45, 100%, 30%);
+  --color-amber-900: hsl(45, 100%, 28%);
+  --color-amber-950: hsl(45, 100%, 16%);
+  --color-yellow-50: hsl(54, 100%, 96%);
+  --color-yellow-100: hsl(54, 100%, 93%);
+  --color-yellow-200: hsl(54, 100%, 86%);
+  --color-yellow-300: hsl(54, 100%, 79%);
+  --color-yellow-400: hsl(54, 100%, 68%);
+  --color-yellow-500: hsl(54, 100%, 60%);
+  --color-yellow-600: hsl(54, 100%, 52%);
+  --color-yellow-700: hsl(54, 100%, 44%);
+  --color-yellow-800: hsl(54, 100%, 37%);
+  --color-yellow-900: hsl(54, 100%, 33%);
+  --color-yellow-950: hsl(54, 100%, 20%);
+  --color-lime-50: hsl(75, 100%, 96%);
+  --color-lime-100: hsl(75, 100%, 91%);
+  --color-lime-200: hsl(75, 100%, 77%);
+  --color-lime-300: hsl(75, 100%, 64%);
+  --color-lime-400: hsl(75, 100%, 59%);
+  --color-lime-500: hsl(75, 100%, 51%);
+  --color-lime-600: hsl(75, 100%, 42%);
+  --color-lime-700: hsl(75, 100%, 34%);
+  --color-lime-800: hsl(75, 100%, 28%);
+  --color-lime-900: hsl(75, 100%, 26%);
+  --color-lime-950: hsl(75, 100%, 10%);
+  --color-green-50: hsl(146, 100%, 97%);
+  --color-green-100: hsl(146, 100%, 94%);
+  --color-green-200: hsl(146, 100%, 82%);
+  --color-green-300: hsl(146, 100%, 72%);
+  --color-green-400: hsl(146, 100%, 58%);
+  --color-green-500: hsl(146, 100%, 48%);
+  --color-green-600: hsl(146, 100%, 40%);
+  --color-green-700: hsl(146, 100%, 35%);
+  --color-green-800: hsl(146, 100%, 30%);
+  --color-green-900: hsl(146, 100%, 26%);
+  --color-green-950: hsl(146, 100%, 12%);
+  --color-emerald-50: hsl(158, 100%, 96%);
+  --color-emerald-100: hsl(158, 100%, 93%);
+  --color-emerald-200: hsl(158, 100%, 82%);
+  --color-emerald-300: hsl(158, 100%, 70%);
+  --color-emerald-400: hsl(158, 100%, 54%);
+  --color-emerald-500: hsl(158, 100%, 44%);
+  --color-emerald-600: hsl(158, 100%, 38%);
+  --color-emerald-700: hsl(158, 100%, 34%);
+  --color-emerald-800: hsl(158, 100%, 30%);
+  --color-emerald-900: hsl(158, 100%, 27%);
+  --color-emerald-950: hsl(158, 100%, 12%);
+  --color-teal-50: hsl(174, 100%, 98%);
+  --color-teal-100: hsl(174, 100%, 94%);
+  --color-teal-200: hsl(174, 100%, 86%);
+  --color-teal-300: hsl(174, 100%, 75%);
+  --color-teal-400: hsl(174, 100%, 63%);
+  --color-teal-500: hsl(174, 100%, 51%);
+  --color-teal-600: hsl(174, 100%, 43%);
+  --color-teal-700: hsl(174, 100%, 39%);
+  --color-teal-800: hsl(174, 100%, 34%);
+  --color-teal-900: hsl(174, 100%, 31%);
+  --color-teal-950: hsl(174, 100%, 16%);
+  --color-cyan-50: hsl(190, 100%, 98%);
+  --color-cyan-100: hsl(190, 100%, 94%);
+  --color-cyan-200: hsl(190, 100%, 85%);
+  --color-cyan-300: hsl(190, 100%, 75%);
+  --color-cyan-400: hsl(190, 100%, 62%);
+  --color-cyan-500: hsl(190, 100%, 53%);
+  --color-cyan-600: hsl(190, 100%, 46%);
+  --color-cyan-700: hsl(190, 100%, 39%);
+  --color-cyan-800: hsl(190, 100%, 35%);
+  --color-cyan-900: hsl(190, 100%, 32%);
+  --color-cyan-950: hsl(190, 100%, 20%);
+  --color-sky-50: hsl(197, 100%, 98%);
+  --color-sky-100: hsl(197, 100%, 96%);
+  --color-sky-200: hsl(197, 100%, 90%);
+  --color-sky-300: hsl(197, 100%, 80%);
+  --color-sky-400: hsl(197, 100%, 68%);
+  --color-sky-500: hsl(197, 100%, 58%);
+  --color-sky-600: hsl(197, 100%, 52%);
+  --color-sky-700: hsl(197, 100%, 44%);
+  --color-sky-800: hsl(197, 100%, 37%);
+  --color-sky-900: hsl(197, 100%, 33%);
+  --color-sky-950: hsl(197, 100%, 21%);
+  --color-blue-50: hsl(214, 100%, 96%);
+  --color-blue-100: hsl(214, 100%, 91%);
+  --color-blue-200: hsl(214, 100%, 86%);
+  --color-blue-300: hsl(214, 100%, 76%);
+  --color-blue-400: hsl(214, 100%, 65%);
+  --color-blue-500: hsl(214, 100%, 60%);
+  --color-blue-600: hsl(214, 100%, 55%);
+  --color-blue-700: hsl(214, 100%, 50%);
+  --color-blue-800: hsl(214, 100%, 44%);
+  --color-blue-900: hsl(214, 100%, 39%);
+  --color-blue-950: hsl(214, 100%, 24%);
+  --color-indigo-50: hsl(227, 100%, 97%);
+  --color-indigo-100: hsl(227, 100%, 93%);
+  --color-indigo-200: hsl(227, 100%, 88%);
+  --color-indigo-300: hsl(227, 100%, 74%);
+  --color-indigo-400: hsl(227, 100%, 61%);
+  --color-indigo-500: hsl(227, 100%, 54%);
+  --color-indigo-600: hsl(227, 100%, 46%);
+  --color-indigo-700: hsl(227, 100%, 40%);
+  --color-indigo-800: hsl(227, 100%, 34%);
+  --color-indigo-900: hsl(227, 100%, 30%);
+  --color-indigo-950: hsl(227, 100%, 19%);
+  --color-violet-50: hsl(273, 100%, 97%);
+  --color-violet-100: hsl(273, 100%, 94%);
+  --color-violet-200: hsl(273, 100%, 91%);
+  --color-violet-300: hsl(273, 100%, 86%);
+  --color-violet-400: hsl(273, 100%, 75%);
+  --color-violet-500: hsl(273, 100%, 69%);
+  --color-violet-600: hsl(273, 100%, 63%);
+  --color-violet-700: hsl(273, 100%, 59%);
+  --color-violet-800: hsl(273, 100%, 53%);
+  --color-violet-900: hsl(273, 100%, 49%);
+  --color-violet-950: hsl(273, 100%, 35%);
+  --color-purple-50: hsl(270, 100%, 97%);
+  --color-purple-100: hsl(270, 100%, 95%);
+  --color-purple-200: hsl(270, 100%, 91%);
+  --color-purple-300: hsl(270, 100%, 85%);
+  --color-purple-400: hsl(270, 100%, 75%);
+  --color-purple-500: hsl(270, 100%, 70%);
+  --color-purple-600: hsl(270, 100%, 65%);
+  --color-purple-700: hsl(270, 100%, 60%);
+  --color-purple-800: hsl(270, 100%, 55%);
+  --color-purple-900: hsl(270, 100%, 50%);
+  --color-purple-950: hsl(270, 100%, 32%);
+  --color-fuchsia-50: hsl(300, 100%, 97%);
+  --color-fuchsia-100: hsl(300, 100%, 94%);
+  --color-fuchsia-200: hsl(300, 100%, 90%);
+  --color-fuchsia-300: hsl(300, 100%, 84%);
+  --color-fuchsia-400: hsl(300, 100%, 74%);
+  --color-fuchsia-500: hsl(300, 100%, 69%);
+  --color-fuchsia-600: hsl(300, 100%, 60%);
+  --color-fuchsia-700: hsl(300, 100%, 55%);
+  --color-fuchsia-800: hsl(300, 100%, 50%);
+  --color-fuchsia-900: hsl(300, 100%, 45%);
+  --color-fuchsia-950: hsl(300, 100%, 29%);
+  --color-pink-50: hsl(330, 100%, 97%);
+  --color-pink-100: hsl(330, 100%, 95%);
+  --color-pink-200: hsl(330, 100%, 91%);
+  --color-pink-300: hsl(330, 100%, 84%);
+  --color-pink-400: hsl(330, 100%, 71%);
+  --color-pink-500: hsl(330, 100%, 62%);
+  --color-pink-600: hsl(330, 100%, 56%);
+  --color-pink-700: hsl(330, 100%, 51%);
+  --color-pink-800: hsl(330, 100%, 46%);
+  --color-pink-900: hsl(330, 100%, 41%);
+  --color-pink-950: hsl(330, 100%, 27%);
+  --color-rose-50: hsl(348, 100%, 97%);
+  --color-rose-100: hsl(348, 100%, 94%);
+  --color-rose-200: hsl(348, 100%, 87%);
+  --color-rose-300: hsl(348, 100%, 76%);
+  --color-rose-400: hsl(348, 100%, 67%);
+  --color-rose-500: hsl(348, 100%, 56%);
+  --color-rose-600: hsl(348, 100%, 47%);
+  --color-rose-700: hsl(348, 100%, 38%);
+  --color-rose-800: hsl(348, 100%, 31%);
+  --color-rose-900: hsl(348, 100%, 27%);
+  --color-rose-950: hsl(348, 100%, 14%);
+}
+
+@layer base {
+  .statistics {
+    background: linear-gradient(to bottom, rgba(22, 22, 22, 0.95), rgba(8, 8, 8, 0.95));
+  }
+
+  * {
+    @apply border-border outline-[hsla(0_0%_45%_/_0.5)];
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Sora", sans-serif
+  }
+
+  body {
+    @apply text-white h-svh;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+
+  body.dev {
+    background-image: url("https://gocdkeys.it/assets/thumbnails/grand-theft-auto-v-ps5-3.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .notification {
+    animation: notify-in 200ms ease-out;
+  }
+
+  .notification.out {
+    animation: notify-out 200ms ease-out;
+  }
+
+  .no-scroll::-webkit-scrollbar {
+    width: 0;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  @keyframes notify-in {
+    from {
+      opacity: 0;
+      translate: 100%;
+    }
+  }
+  @keyframes notify-out {
+    to {
+      opacity: 0;
+      translate: 100%;
+    }
+  }
+
+  @keyframes width-to-full {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .out {
+    animation: out 200ms ease-out;
+  }
+
+  @keyframes in {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes out {
+    to {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+  }
+}

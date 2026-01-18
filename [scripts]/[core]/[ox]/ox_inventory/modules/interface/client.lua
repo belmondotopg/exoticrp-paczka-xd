@@ -1,0 +1,18 @@
+if not lib then return end
+
+-- Module is deprecated and provided for compatibility
+-- All functions are now part of with ox_lib
+
+exports('Keyboard', lib.inputDialog)
+
+exports('Progress', function(options, completed)
+	local esx_hud = exports.esx_hud
+	local success = esx_hud:progressBar(options)
+
+	if completed then
+		completed(not success)
+	end
+end)
+
+exports('CancelProgress', lib.cancelProgress)
+exports('ProgressActive', lib.progressActive)

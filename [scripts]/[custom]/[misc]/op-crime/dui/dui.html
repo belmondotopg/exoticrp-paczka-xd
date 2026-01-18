@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OP CRIME GRAFFITI DUI</title>
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+
+    <style>
+        @font-face {
+            font-family: "GraffitiYouth";
+            src: url("./aAttackGraffiti.woff2") format("woff2");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: transparent;
+            overflow: hidden;
+        }
+
+        #GraffitiBox {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #graffitiText {
+            font-family: "GraffitiYouth", sans-serif;
+            font-weight: normal;
+            font-size: 100px;
+            line-height: 1;
+            white-space: nowrap;
+            transform-origin: center center;
+            text-align: center;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="GraffitiBox">
+        <div id="graffitiText" style="color: #ffffff00;">Bloods Gang</div>
+    </div>
+
+    <script>
+        const graffitiText = document.getElementById("graffitiText");
+
+        function scaleToFitScreen() {
+            graffitiText.style.transform = "scale(1)";
+
+            const parent = graffitiText.parentElement;
+            const parentWidth = parent.offsetWidth;
+            const parentHeight = parent.offsetHeight;
+
+            const textWidth = graffitiText.scrollWidth;
+            const textHeight = graffitiText.scrollHeight;
+
+            const scaleX = parentWidth / textWidth;
+            const scaleY = parentHeight / textHeight;
+            const scale = Math.min(scaleX, scaleY) * 0.9;
+
+            graffitiText.style.transform = `scale(${scale})`;
+        }
+
+        window.addEventListener("load", scaleToFitScreen);
+        window.addEventListener("resize", scaleToFitScreen);
+
+        window.addEventListener("message", function (event) {
+            if (event.data.action === "setGangName") {
+                graffitiText.textContent = event.data.gangName || "NoName";
+                graffitiText.style.color = event.data.color || "white";
+                scaleToFitScreen(); 
+            }
+        });
+
+        window.addEventListener("DOMContentLoaded", function () {
+            fetch("https://op-crime/onDuiReady", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ready: true })
+            }).catch(err => console.error("Failed to send onReady:", err));
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+.recipe {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 0.8vw;
+    padding: 1.2vh 0.6vw;
+    width: 98%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 0.2vw;
+    transition: all 0.2s ease-in-out;
+}
+
+.recipe span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+}
+
+.recipe span p:nth-child(1) {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75vw;
+}
+
+.recipe span p:nth-child(2) {
+    line-height: 1.7vh;
+    color: #BCBCBC;
+    font-weight: 300;
+    font-size: 0.65vw;
+}
+
+.recipe .recipe__level {
+    position: absolute;
+    right: 1vw;
+    font-size: 0.55vw;
+    top: 1vw;
+}
+
+.recipe:not(.disabled):hover {
+    transform: translateX(0.2vw);
+    border-color: #9A6F1D;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(255, 189, 45, 0.1) 0%, rgba(255, 189, 45, 0.02) 100%);
+}
+
+.recipe:not(.disabled):hover span p:first-child {
+    color: #FF9538;
+}
+
+.recipe.active {
+    border-color: #9A6F1D;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(255, 189, 45, 0.1) 0%, rgba(255, 189, 45, 0.02) 100%);
+}
+
+.recipe.active span p:first-child {
+    color: #FF9538;
+}
+
+.recipe.disabled {
+    border-color: #2A2A2A;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(91, 91, 91, 0.1) 0%, rgba(91, 91, 91, 0.02) 100%);
+}
+
+.recipe.disabled img {
+    opacity: 30%;
+}
+
+.recipe.disabled span p:first-child {
+    color: #686868;
+}
+
+.recipe.disabled span p:last-child {
+    color: #474747;
+}
+
+.recipe.disabled:hover {
+    cursor: not-allowed;
+}

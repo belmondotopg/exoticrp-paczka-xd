@@ -1,0 +1,126 @@
+.kariee_paycheck{
+    position: relative;
+    height: 100%;
+
+    .kariee_header{
+        padding-right: 13px;
+    }
+
+    .kariee_paycheck_content{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 95%;
+        gap: 5px;
+        overflow-y: scroll;
+        padding-right: 10px;
+        input{
+            background-color: var(--_contentColor);
+            border: unset;
+            color: white;
+            padding: 10px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .kmc_content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5px;
+            
+            .kmc_content_info{
+                flex-grow: 1;
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                font-size: .8rem; 
+                div{
+                    flex-grow: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--_contentColor);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    box-sizing: border-box;
+                }
+                .small_data{
+                    flex-grow: 0;
+                    width: 5%;
+                }
+
+                .kmc_content_money{
+                    width: 15%;
+                }
+
+                .kmc_content_rate{
+                    width: 8%;
+                    font-size: .7rem;
+                    color: var(--_descriptionText);
+                }
+
+                .kmc_content_active{
+                    width: 5%;
+                    height: 20px;
+                    border-radius: 4px;
+                    min-width: 20px;
+                    flex-shrink: 0;
+                }
+
+                .kmc_content_job{
+                    width: 18%;
+                }
+
+                .kmc_content_name{
+                    padding: 0px 10px;
+                    box-sizing: border-box;
+                    width: 40%;
+                    .kmc_content_name_data{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: flex-end;
+                        gap: 3.5px;
+                        .kmc_c_name_dcid{
+                            font-size: .6rem;
+                            color: var(--_descriptionText)
+                        }
+                    }
+                    .kmc_content_name_copy{
+                        color: var(--_descriptionText);
+                        &:hover{
+                            opacity: .8;
+                            cursor: pointer;
+                            transition: all 250ms;
+                        }
+
+                        &:active{
+                            scale: 0.95;
+                        }
+                    }
+                }
+
+                .kmc_content_job{
+                    justify-content: flex-start;
+                    padding: 0px 10px;
+                    box-sizing: border-box;
+                }
+
+            }
+
+            .kmc_content_buttons{
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+            }
+        }
+    }
+}
+
+.btn{
+    width: 135px;
+    font-size: .7rem;
+}

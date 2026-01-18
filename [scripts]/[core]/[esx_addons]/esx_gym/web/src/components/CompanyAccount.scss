@@ -1,0 +1,247 @@
+@use '../App.scss' as *;
+
+.company-account {
+  @extend %component-base;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  &__container {
+    @extend %container-base;
+  }
+
+  &__header {
+    @extend %header-base;
+  }
+
+  &__back {
+    @extend %button-base;
+  }
+
+  &__title {
+    @extend %title-base;
+  }
+
+  &__close {
+    @extend %button-base;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__info {
+    @extend %card-base;
+    text-align: center;
+    padding: 24px;
+  }
+
+  &__description {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &__balance-section {
+    @extend %card-base;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    padding: 32px;
+    text-align: center;
+  }
+
+  &__balance-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  &__balance-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+  }
+
+  &__balance-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__balance-amount {
+    color: #10b981;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 16px 0;
+    text-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    letter-spacing: -0.5px;
+  }
+
+  &__balance-label {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  &__withdraw-section {
+    @extend %card-base;
+  }
+
+  &__withdraw-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__withdraw-title {
+    @extend %section-title;
+    margin-bottom: 0;
+  }
+
+  &__withdraw-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__form-label {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__form-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  &__form-input {
+    flex: 1;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #10b981;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  }
+
+  &__max-btn {
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+    }
+
+    &:disabled {
+      background: #6b7280;
+      border-color: #6b7280;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &__available-info {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+  &__withdraw-btn {
+    width: 100%;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.4);
+    }
+
+    &:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    &--loading {
+      background: #6b7280;
+      cursor: not-allowed;
+    }
+  }
+
+}
+

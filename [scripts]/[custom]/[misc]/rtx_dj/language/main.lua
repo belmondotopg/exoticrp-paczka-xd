@@ -1,0 +1,28 @@
+Language = {
+    ["English"] = {
+ 		["pressfordj"] = "Press ["..Config.DjOpenKey.."] for open dj menu",
+		["pressfordjinteract"] = "Press <span id='infobindcolor'>"..Config.DjOpenKey.."</span> for dj menu",
+		["pressfordjinteractclassic"] = "Press ~INPUT_CONTEXT~ for dj menu",	
+		["djmenu"] = "DJ MENU",		
+		["djperms"] = "You are not authorized to use this DJ menu.",		
+		["djsusing"] = "Someone already has the DJ menu open.",	
+		["locationcreated"] = "Created a new DJ location (%s)",	
+		["locationedited"] = "Edited a DJ location (%s)",	
+		["locationremoved"] = "Removed a DJ location (%s)",	
+		["streamerdeactivated"] = "Streamer mode deactivated",
+		["streamerdactivated"] = "Streamer mode activated",		
+    },
+	["Polish"] = {
+		["pressfordj"] = "Naciśnij ["..Config.DjOpenKey.."], aby otworzyć menu DJ-a",
+		["pressfordjinteract"] = "Naciśnij <span id='infobindcolor'>"..Config.DjOpenKey.."</span>, aby otworzyć menu DJ-a",
+		["pressfordjinteractclassic"] = "Naciśnij ~INPUT_CONTEXT~, aby otworzyć menu DJ-a",
+		["djmenu"] = "MENU DJ-A",
+		["djperms"] = "Nie masz uprawnień do korzystania z menu DJ-a.",
+		["djsusing"] = "Ktoś już ma otwarte menu DJ-a.",
+		["locationcreated"] = "Utworzono nową lokalizację DJ-a (%s)",
+		["locationedited"] = "Edytowano lokalizację DJ-a (%s)",
+		["locationremoved"] = "Usunięto lokalizację DJ-a (%s)",
+		["streamerdeactivated"] = "Tryb streamera został wyłączony",
+		["streamerdactivated"] = "Tryb streamera został włączony",
+	},
+}

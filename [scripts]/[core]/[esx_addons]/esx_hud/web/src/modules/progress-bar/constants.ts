@@ -1,0 +1,1 @@
+export const DEFAULT_PROGRESS_BAR_DURATION = 10;

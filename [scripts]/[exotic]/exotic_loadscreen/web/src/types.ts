@@ -1,0 +1,1 @@
+export type KeyboardType = Record<string, string[]>;

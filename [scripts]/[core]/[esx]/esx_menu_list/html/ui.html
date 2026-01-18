@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/app.css" />
+		
+		<script>
+			function SearchRows() {
+				let input = (document.getElementById('search').value).toLowerCase()
+				let El = document.getElementsByTagName('tr')
+				
+				if (El) {
+					for (i = 1; i < El.length; i++) { 
+						let text = El[i].textContent.toLowerCase()
+						
+						if (text) {							
+							if (text.includes(input)) {
+								El[i].style.display = 'table-row'
+							} else {
+								El[i].style.display = 'none'
+							}
+						}
+					}	
+				}
+			}		
+		</script>
+	</head>
+	<body>
+		<div id="menus">				
+
+		</div>
+
+		<script src="nui://game/ui/jquery.js"></script>
+		<script src="nui://es_extended/html/js/wrapper.js"></script>
+		<script src="js/mustache.min.js"></script>
+		<script src="js/app.js"></script>
+
+	</body>
+</html>

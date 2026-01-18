@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.layout {
+	display: none;
+}
+
+.compDiv {
+	display: none;
+}
+
+html {
+	-webkit-text-size-adjust: none;
+	-webkit-touch-callout: none;
+	display: none;
+}
+
+#component {
+	font-family: "VT323", monospace;
+	font-weight: 400;
+	font-size: 3.0rem;
+	margin-top: 3%;
+}
+
+body {
+	margin: 0;
+	padding: 20px 0;
+	border: none;
+	overflow: hidden;
+	user-select: none;
+}
+
+img {
+	user-select: none;
+	border: 2px solid black;
+	vertical-align: middle;
+}
+
+p {
+	-webkit-text-size-adjust: none;
+	-webkit-touch-callout: none;
+}
+
+.hide {
+	display: none;
+}
+
+.box {
+	position: absolute;
+	width: auto;
+	height: auto;
+	top: 70%;
+	left: 35%;
+	margin-right: -50%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.box img {
+	max-width: 600px;
+	max-height: 232px;
+}
+
+.compDiv {
+	-webkit-text-size-adjust: none;
+	-webkit-touch-callout: none;
+	width: 460px;
+	position: absolute;
+	top: 45%;
+	left: 15%;
+	color: #ff8000;
+	text-align: center;
+	font-size: 25px;
+	font-family: 'Rowdies', cursive;
+}
+
+.mask {
+	position: absolute;
+	top: 41%;
+	left: 15%;
+	cursor: pointer;
+}
